@@ -540,7 +540,6 @@
             transition: background-color 0.3s;
         }
         
-        /* পরিবর্তন: পেমেন্ট ফর্ম ছোট করা */
         #payment-modal .modal-content {
             max-width: 400px;
             padding: 30px;
@@ -622,7 +621,6 @@
             color: var(--primary-color);
         }
 
-        /* পরিবর্তন: নতুন পেমেন্ট সিলেকশন স্টাইল */
         .payment-option {
             display: block;
             margin-bottom: 15px;
@@ -664,9 +662,7 @@
             border-color: var(--primary-color);
             background-color: color-mix(in srgb, var(--primary-color) 10%, transparent);
         }
-        .payment-option {
-            
-        }
+        
         .copy-btn {
             background: none;
             border: none;
@@ -835,46 +831,76 @@
             text-align: center;
         }
         
+        /* -------- পরিবর্তিত রেসপন্সিভ কোড -------- */
+
+        /* ট্যাবলেট ডিভাইসের জন্য স্টাইল (992px পর্যন্ত) */
         @media (max-width: 992px) {
             .search-container {
-                width: 250px; /* ট্যাবলেটের জন্য প্রস্থ কমানো */
+                width: 280px; /* সার্চ বার একটু ছোট করা হলো */
+            }
+            .nav-links {
+                display: none; /* ট্যাবলেটেও মেনু লিঙ্কগুলো হাইড করে হ্যামবার্গার মেনু আনা হলো */
+            }
+            .navbar-toggle {
+                display: block; /* হ্যামবার্গার মেনু দেখানো হলো */
             }
             .dashboard-grid,
             .profile-edit-grid {
                 grid-template-columns: 1fr;
             }
-
             .dashboard-nav,
             .profile-edit-nav {
                 margin-bottom: 20px;
             }
         }
 
+        /* মোবাইল ডিভাইসের জন্য সম্পূর্ণ নতুন রেসপন্সিভ স্টাইল (768px পর্যন্ত) */
         @media (max-width: 768px) {
-            /* নতুন সংযোজন: ছোট স্ক্রিনে সার্চ বার লুকিয়ে রাখা */
-            .search-container {
-                display: none;
+            body {
+                /* হেডার বড় হওয়ায় বডিতে একটু বেশি প্যাডিং দেওয়া হলো */
+                padding-top: 125px; 
             }
+            
+            .navbar {
+                height: auto; /* উচ্চতা অটো করা হলো */
+                flex-wrap: wrap; /* আইটেমগুলোকে নতুন লাইনে আনার জন্য */
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .navbar-brand {
+                /* ব্র্যান্ডকে পুরো জায়গা দেওয়ার জন্য */
+                flex-grow: 1; 
+            }
+            
+            .search-container {
+                /* সার্চ বারকে নতুন লাইনে আনার জন্য */
+                order: 3; /* ৩ নম্বর পজিশনে সার্চ বারকে আনা হলো */
+                width: 100%;
+                margin: 10px 0 0 0; /* উপরে মার্জিন, ডানে-বামে ০ */
+            }
+
             .navbar-toggle {
-                display: block;
+                display: block; /* হ্যামবার্গার মেনু দেখানো হলো */
                 margin-left: 15px;
             }
 
             .nav-links {
+                /* এই অংশটি হ্যামবার্গার মেনুর ভেতরে চলে যাবে */
+                display: none;
                 position: absolute;
-                top: 70px;
+                top: 125px; /* নতুন দুই-লাইন হেডারের নিচ থেকে শুরু হবে */
                 left: 0;
                 right: 0;
                 background-color: var(--card-bg);
                 flex-direction: column;
                 padding: 10px 0;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                display: none;
                 border-top: 1px solid var(--border-color);
             }
 
             .nav-links.active {
-                display: flex;
+                display: flex; /* জাভাস্ক্রিপ্ট দিয়ে .active ক্লাস যোগ হলে এটি দেখা যাবে */
             }
 
             .nav-links a {
@@ -882,7 +908,7 @@
                 width: 100%;
                 text-align: center;
             }
-
+            
             .product-detail-layout {
                 grid-template-columns: 1fr;
             }
@@ -892,6 +918,21 @@
                 text-align: center;
             }
         }
+
+        /* খুব ছোট মোবাইল ডিভাইসের জন্য অতিরিক্ত স্টাইল (400px পর্যন্ত) */
+        @media (max-width: 400px) {
+            .navbar-brand .navbar-logo {
+                height: 40px; /* লোগো আরেকটু ছোট করা হলো */
+            }
+            .navbar-brand span {
+                font-size: 1.5rem; /* সাইটের নাম ছোট করা হলো */
+            }
+            #login-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
     </style>
 </head>
 
@@ -904,17 +945,12 @@
             <span id="navbar-site-name">AppSmart</span>
         </a>
         
-        <!-- নতুন সংযোজন: সার্চ বার -->
-        <div class="search-container">
-            <input type="text" placeholder="অনুসন্ধান করুন...">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </div>
-
         <div class="nav-links" id="nav-links-container">
             <a href="#" id="nav-home">হোম</a>
             <a href="#" id="nav-premium">প্রিমিয়াম কোড</a>
             <a href="#" id="nav-free">ফ্রি কোড</a>
         </div>
+        
         <div class="navbar-user-section">
             <button id="theme-toggle-btn" title="থিম পরিবর্তন করুন">
                 <i class="fas fa-moon"></i>
@@ -941,14 +977,18 @@
                 <i class="fas fa-bars"></i>
             </button>
         </div>
+        
+        <!-- সার্চ বারকে শেষে আনা হয়েছে যাতে flexbox order ঠিকভাবে কাজ করে -->
+        <div class="search-container">
+            <input type="text" placeholder="অনুসন্ধান করুন...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+
     </nav>
 
     <main id="app">
         <!-- Home Page -->
         <div id="home-page">
-            <!-- ধাপ: ব্যানার সেকশনটি সরানো হয়েছে -->
-            <!-- <div id="banner-slider-container" class="container"></div> -->
-
             <section id="premium-products" class="container">
                 <h2 class="section-heading"> প্রিমিয়াম কালেকশন</h2>
                 <div id="premium-products-grid" class="product-grid"></div>
@@ -1015,7 +1055,6 @@
         <div class="container footer-content">
             <div class="footer-section">
                 <a href="#" class="footer-brand">
-                    <!-- ধাপ: ফুটারে নতুন লোগো যুক্ত করা হয়েছে -->
                     <img id="footer-logo-img" src="https://i.postimg.cc/7YJ2wBqs/fainappbg.png" alt="AppSmart Logo" class="footer-logo">
                     <span id="footer-site-name">AppSmart</span>
                 </a>
@@ -1075,13 +1114,11 @@
             <div id="payment-instructions">
                  <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money) এবং মাধ্যমটি সিলেক্ট করুন।</p>
                 <div id="payment-methods-container">
-                    <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->
                 </div>
                 <br>
                 <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
             </div>
 
-            <!-- ধাপ: প্রোমো কোড এবং মূল্য সামারির জন্য নতুন সেকশন -->
             <div id="price-summary">
                 <p><span>মূল দাম:</span> <span id="original-price-summary"></span></p>
                 <p id="discount-summary" class="hidden"><span>ডিসকাউন্ট:</span> <span id="discount-amount-summary"></span></p>
@@ -1097,7 +1134,6 @@
                 </div>
             </div>
             
-            <!-- পরিবর্তন: ড্রপডাউন মুছে ফেলা হয়েছে এবং ইনপুটের 순서 পরিবর্তন করা হয়েছে -->
             <input type="tel" id="payment-phone-number" placeholder="যে নম্বর থেকে পেমেন্ট করেছেন" required>
             <input type="text" id="transaction-id" placeholder="আপনার পেমেন্ট Transaction ID লিখুন" required>
             <button id="submit-payment-btn" class="primary-btn">পেমেন্ট নিশ্চিত করুন</button>
@@ -1153,7 +1189,6 @@
             }).catch(err => console.error('কপি করতে সমস্যা হয়েছে: ', err));
         }
 
-        // পরিবর্তন: পেমেন্ট মেথড এখন রেডিও বাটন হিসাবে দেখানো হবে
         function fetchPaymentMethods() {
             const paymentMethodsRef = db.ref('allcoding-app/config/paymentMethods');
             paymentMethodsRef.on('value', (snapshot) => {
@@ -1178,7 +1213,6 @@
                         }
                     });
                 } else {
-                    // নতুন লোগো এবং রেডিও বাটন সহ ফলব্যাক
                     container.innerHTML = `
                         <div class="payment-option">
                             <input type="radio" id="method-bkash" name="payment-method-radio" value="bKash" required>
@@ -1388,7 +1422,7 @@
                 document.getElementById('product-detail-content').innerHTML = `<h1>প্রোডাক্ট পাওয়া যায়নি।</h1>`;
                 return;
             }
-            const product = { id: productId, type: type, ...productSnapshot.val() };
+            const product = { id: item.key, ...item.val() };
             const content = document.getElementById('product-detail-content');
             const isPurchased = await checkIfProductIsPurchased(productId);
             
@@ -1515,7 +1549,6 @@
             toggleModal('payment-modal', true);
         }
 
-        // পরিবর্তন: submitPayment ফাংশনটি রেডিও বাটন থেকে তথ্য নিবে
         function submitPayment() {
             const user = auth.currentUser;
             const transactionId = document.getElementById('transaction-id').value;
@@ -1597,8 +1630,6 @@
             }
         }
         
-        // ধাপ: ব্যানার সম্পর্কিত ফাংশনগুলো মুছে ফেলা হয়েছে
-
         function fetchProducts(type, containerId) {
             const path = type === 'premium' ? 'allcoding-app/premiumCodings' : 'allcoding-app/freeCodings';
             const container = document.getElementById(containerId);
@@ -1630,7 +1661,6 @@
             setupEventListeners();
             fetchSiteSettings();
             fetchPaymentMethods();
-            // ধাপ: fetchAndRenderSlider() ফাংশন কলটি সরানো হয়েছে
             fetchProducts('premium', 'premium-products-grid');
             fetchProducts('free', 'free-products-grid');
             navigateTo('home');
