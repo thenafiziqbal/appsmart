@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppSmart - আপনার পছন্দের সোর্স কোড</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* General Styling & Variables */
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #1a202c;
+            --accent-color: #00e0b8;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --light-text-color: #6c757d;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+        }
+
+        /* ########## নতুন: ডার্ক থিম ভ্যারিয়েবল ########## */
+        body.dark-theme {
+            --primary-color: #0d8eff;
+            --secondary-color: #f1f1f1;
+            --accent-color: #00e0b8;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --light-text-color: #a0a0a0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding-top: 70px;
+            /* Space for fixed navbar */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .user-menu-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ########## নতুন: ডার্ক মোড টগল বাটন ########## */
+        #theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        #theme-toggle-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-user button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-user button:hover {
+            background-color: #0056b3;
+        }
+
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-menu-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-family: 'Hind Siliguri', sans-serif;
+            color: var(--text-color);
+        }
+
+        .user-profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+
+        .user-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .user-menu-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .user-menu:hover .user-menu-content {
+            display: block;
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* ########## নতুন: ব্যানার স্লাইডার স্টাইল ########## */
+        .slider-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 400px;
+            /* Adjust height as needed */
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .slider-nav button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .slider-nav button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .slider-container {
+                height: 250px;
+            }
+        }
+
+        /* Section Heading */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Product Grid & Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product-card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+
+        .product-card-footer {
+            margin-top: 15px;
+        }
+
+        .product-card-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .product-card-tag {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Product Detail Page */
+        .product-detail-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .product-images img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-video {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .product-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .product-info h1 {
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+        }
+
+        .product-info .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .buy-btn,
+        .download-btn {
+            background-color: var(--success-color);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .buy-btn:hover,
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        /* User Dashboard & Profile Edit */
+        .dashboard-grid,
+        .profile-edit-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .dashboard-nav,
+        .profile-edit-nav {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .dashboard-nav a,
+        .profile-edit-nav a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .dashboard-nav a.active,
+        .profile-edit-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dashboard-content,
+        .profile-edit-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .order-card {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+
+        .order-card h3 {
+            margin-top: 0;
+        }
+
+        .license-key {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Profile Edit Form */
+        .profile-pic-uploader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-pic-uploader img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Modal (Login/Register/Payment/Popup) */
+        .modal {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            border-top: 5px solid var(--primary-color);
+            transition: background-color 0.3s;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .google-btn {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .google-btn:hover {
+            background-color: #c33d2e;
+        }
+
+        /* Payment Modal Specifics */
+        #payment-instructions {
+            text-align: left;
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            border: 1px solid var(--border-color);
+        }
+
+        #payment-instructions strong {
+            color: var(--danger-color);
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+        
+        .payment-method > span {
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-method-icon {
+            width: 80px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+        
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* ########## উন্নত গ্রাফিক্যাল পপ-আপ ########## */
+        #welcome-popup-modal .modal-content {
+            border-top: none;
+            border-radius: 15px;
+        }
+
+        #welcome-popup-modal .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            margin: -40px -40px 20px -40px;
+        }
+
+        #welcome-popup-modal .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        #welcome-popup-modal .modal-header i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+
+        #popup-message-content {
+            font-size: 1.1rem;
+            margin: 20px 0;
+            color: var(--light-text-color);
+        }
+
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: #f8f9fa;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        body.dark-theme .footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            margin: 20px;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+        }
+
+        .footer-section a {
+            color: #f8f9fa;
+            text-decoration: none;
+        }
+
+        body.dark-theme .footer-section a {
+            color: #ccc;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        .footer-socials a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+
+            .dashboard-grid,
+            .profile-edit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-nav,
+            .profile-edit-nav {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggle {
+                display: block;
+                margin-left: 15px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                padding: 10px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+                /* Initially hidden */
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .product-detail-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#" id="nav-brand" class="navbar-brand">AppSmart</a>
+        <div class="nav-links" id="nav-links-container">
+            <a href="#" id="nav-home">হোম</a>
+            <a href="#" id="nav-premium">প্রিমিয়াম কোড</a>
+            <a href="#" id="nav-free">ফ্রি কোড</a>
+        </div>
+        <div class="navbar-user-section">
+            <button id="theme-toggle-btn" title="থিম পরিবর্তন করুন">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="navbar-user">
+                <div id="user-logged-out">
+                    <button id="login-btn">লগইন / রেজিস্টার</button>
+                </div>
+                <div id="user-logged-in" class="user-menu hidden">
+                    <button class="user-menu-button">
+                        <img id="user-profile-pic-nav" src="https://i.ibb.co/6yT1W9N/placeholder-user.png" alt="User"
+                            class="user-profile-pic">
+                        <span id="user-name-btn">অ্যাকাউন্ট</span> <i class="fas fa-caret-down"
+                            style="margin-left: 5px;"></i>
+                    </button>
+                    <div class="user-menu-content">
+                        <a href="#" id="dashboard-link">ড্যাশবোর্ড</a>
+                        <a href="#" id="profile-edit-link">প্রোফাইল এডিট</a>
+                        <a href="#" id="logout-btn">লগআউট</a>
+                    </div>
+                </div>
+            </div>
+            <button class="navbar-toggle" id="navbar-toggle-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main id="app">
+
+        <!-- Home Page -->
+        <div id="home-page">
+            <div id="banner-slider-container" class="container"></div>
+
+            <section id="premium-products" class="container">
+                <h2 class="section-heading">👑 প্রিমিয়াম কালেকশন</h2>
+                <div id="premium-products-grid" class="product-grid"></div>
+            </section>
+            <section id="free-products" class="container" style="margin-top: 50px;">
+                <h2 class="section-heading">🎉 ফ্রী সোর্স কোড</h2>
+                <div id="free-products-grid" class="product-grid"></div>
+            </section>
+        </div>
+
+        <!-- Product Detail Page -->
+        <div id="product-detail-page" class="hidden">
+            <div class="container" id="product-detail-content"></div>
+        </div>
+
+        <!-- User Dashboard Page -->
+        <div id="user-dashboard-page" class="hidden">
+            <div class="container">
+                <h2 class="section-heading">আমার অ্যাকাউন্ট</h2>
+                <div class="dashboard-grid">
+                    <nav class="dashboard-nav">
+                        <a href="#" id="dashboard-nav-purchases" class="active">আমার কেনা প্রোডাক্ট</a>
+                    </nav>
+                    <div class="dashboard-content">
+                        <div id="purchased-items-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Page -->
+        <div id="profile-edit-page" class="hidden">
+            <div class="container">
+                <h2 class="section-heading">প্রোফাইল এডিট</h2>
+                <div class="profile-edit-grid">
+                    <nav class="profile-edit-nav">
+                        <a href="#" id="profile-edit-nav-info" class="active">সাধারণ তথ্য</a>
+                    </nav>
+                    <div class="profile-edit-content">
+                        <div class="profile-pic-uploader">
+                            <img id="profile-edit-pic-preview" src="https://i.ibb.co/6yT1W9N/placeholder-user.png"
+                                alt="Profile Picture">
+                            <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
+                            <button class="primary-btn"
+                                onclick="document.getElementById('profile-pic-input').click()">ছবি পরিবর্তন
+                                করুন</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-edit-name">আপনার নাম</label>
+                            <input type="text" id="profile-edit-name" placeholder="আপনার পুরো নাম">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-edit-phone">আপনার ফোন</label>
+                            <input type="text" id="profile-edit-phone" placeholder="আপনার ফোন নম্বর">
+                        </div>
+                        <button id="profile-save-btn" class="primary-btn">তথ্য সেভ করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3 id="footer-site-name">AppSmart</h3>
+                <p>সেরা মানের সোর্স কোড কিনুন এবং আপনার স্বপ্নকে বাস্তবে রূপ দিন।</p>
+            </div>
+            <div class="footer-section">
+                <h3>গুরুত্বপূর্ণ লিংক</h3>
+                <a href="#">আমাদের সম্পর্কে</a><br>
+                <a href="#">যোগাযোগ</a><br>
+                <a href="#">শর্তাবলী</a>
+            </div>
+            <div class="footer-section">
+                <h3>সামাজিক মাধ্যম</h3>
+                <div class="footer-socials">
+                    <a id="footer-fb" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a id="footer-tg" href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a id="footer-yt" href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 <span id="footer-site-name-copy">AppSmart</span>. সর্বস্বত্ব সংরক্ষিত।
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" data-modal-id="auth-modal">&times;</span>
+            <div id="login-form">
+                <h2>লগইন করুন</h2>
+                <input type="email" id="login-email" placeholder="আপনার ইমেল" required>
+                <input type="password" id="login-password" placeholder="আপনার পাসওয়ার্ড" required>
+                <button id="login-submit-btn" class="primary-btn">লগইন</button>
+                <p class="form-switch">অ্যাকাউন্ট নেই? <a id="show-register-form" href="#">রেজিস্টার করুন</a></p>
+            </div>
+            <div id="register-form" class="hidden">
+                <h2>নতুন অ্যাকাউন্ট তৈরি করুন</h2>
+                <input type="text" id="register-name" placeholder="আপনার নাম" required>
+                <input type="text" id="register-phone" placeholder="আপনার ফোন নম্বর" required>
+                <input type="email" id="register-email" placeholder="আপনার ইমেল" required>
+                <input type="password" id="register-password" placeholder="নতুন পাসওয়ার্ড" required>
+                <button id="register-submit-btn" class="primary-btn">রেজিস্টার</button>
+                <p class="form-switch">ইতিমধ্যে অ্যাকাউন্ট আছে? <a id="show-login-form" href="#">লগইন করুন</a></p>
+            </div>
+            <hr style="margin: 20px 0;">
+            <button id="google-login-btn" class="google-btn"><i class="fab fa-google"></i> গুগল দিয়ে লগইন করুন</button>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" data-modal-id="payment-modal">&times;</span>
+            <h2 id="payment-product-name">পেমেন্ট প্রক্রিয়া</h2>
+            <div id="payment-instructions">
+                <p>অনুগ্রহ করে নিচের যেকোনো একটি মাধ্যমে <strong><span id="payment-price"></span></strong> পেমেন্ট করুন (Send Money)।</p>
+                <div class="payment-method">
+                    <span>
+                        <img src="https://i.postimg.cc/Wzs3KT5J/th.jpg" alt="bKash" class="payment-method-icon">
+                        <strong>বিকাশ: <span id="payment-bkash-number">01613927674</span></strong>
+                    </span>
+                    <button class="copy-btn" onclick="copyToClipboard('payment-bkash-number')"><i class="fas fa-copy"></i></button>
+                </div>
+                <div class="payment-method">
+                     <span>
+                        <img src="https://i.postimg.cc/4dDBFnvf/OIP.webp" alt="Nagad" class="payment-method-icon">
+                        <strong>নগদ: <span id="payment-nagad-number">01613927674</span></strong>
+                    </span>
+                    <button class="copy-btn" onclick="copyToClipboard('payment-nagad-number')"><i class="fas fa-copy"></i></button>
+                </div>
+                <br>
+                <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
+            </div>
+            <input type="tel" id="payment-phone-number" placeholder="যে নম্বর থেকে পেমেন্ট করেছেন" required>
+            <input type="text" id="transaction-id" placeholder="আপনার পেমেন্ট Transaction ID লিখুন" required>
+            <button id="submit-payment-btn" class="primary-btn">পেমেন্ট নিশ্চিত করুন</button>
+        </div>
+    </div>
+
+    <div id="welcome-popup-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" data-modal-id="welcome-popup-modal">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-bullhorn"></i> একটি ঘোষণা</h2>
+            </div>
+            <p id="popup-message-content"></p>
+            <button id="popup-close-btn" class="primary-btn">ঠিক আছে, বুঝেছি</button>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // আপনার ফায়ারবেস কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWi6X0ooF9jje4x1ztGqpI49OG_IcN0Cs",
+            authDomain: "appsmart-ed209.firebaseapp.com",
+            databaseURL: "https://appsmart-ed209-default-rtdb.firebaseio.com",
+            projectId: "appsmart-ed209",
+            storageBucket: "appsmart-ed209.appspot.com",
+            messagingSenderId: "528639998794",
+            appId: "1:528639998794:web:498f77196f0ebddab0dfb3"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Firebase services
+        const auth = firebase.auth();
+        const db = firebase.database();
+        const storage = firebase.storage();
+
+        // Global State
+        let currentProductForPayment = null;
+        let visiblePage = 'home';
+
+        // DOM Elements Cache
+        const elements = {
+            pages: { home: document.getElementById('home-page'), productDetail: document.getElementById('product-detail-page'), dashboard: document.getElementById('user-dashboard-page'), profileEdit: document.getElementById('profile-edit-page'), },
+            modals: { auth: document.getElementById('auth-modal'), payment: document.getElementById('payment-modal'), welcome: document.getElementById('welcome-popup-modal'), },
+        };
+        
+        // --- ইউটিলিটি ফাংশন ---
+        function copyToClipboard(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert(`"${textToCopy}" নম্বরটি কপি করা হয়েছে!`);
+            }).catch(err => {
+                console.error('কপি করতে সমস্যা হয়েছে: ', err);
+            });
+        }
+
+        function fetchPaymentMethods() {
+            const paymentMethodsRef = db.ref('allcoding-app/paymentMethods');
+            paymentMethodsRef.on('value', (snapshot) => {
+                const bkashNumberEl = document.getElementById('payment-bkash-number');
+                const nagadNumberEl = document.getElementById('payment-nagad-number');
+                // ডিফল্ট নম্বর সেট করা
+                bkashNumberEl.innerText = '01613927674';
+                nagadNumberEl.innerText = '01613927674';
+
+                if (snapshot.exists()) {
+                    const methods = snapshot.val();
+                    Object.values(methods).forEach(method => {
+                        if (method.name && method.name.includes('বিকাশ')) {
+                            bkashNumberEl.innerText = method.number || '01613927674';
+                        }
+                        if (method.name && method.name.includes('নগদ')) {
+                            nagadNumberEl.innerText = method.number || '01613927674';
+                        }
+                    });
+                }
+            });
+        }
+        
+        // --- NAVIGATION ---
+        function navigateTo(pageName, context) {
+            Object.values(elements.pages).forEach(page => page.classList.add('hidden'));
+            if (elements.pages[pageName]) {
+                elements.pages[pageName].classList.remove('hidden');
+                visiblePage = pageName;
+                window.scrollTo(0, 0);
+
+                if (pageName === 'productDetail' && context) showProductDetail(context.id, context.type);
+                if (pageName === 'dashboard') showUserDashboard();
+                if (pageName === 'profileEdit') showProfileEditPage();
+            }
+            document.getElementById('nav-links-container').classList.remove('active');
+        }
+
+        function filterProducts(type) {
+            navigateTo('home');
+            document.getElementById('premium-products').style.display = (type === 'premium' || type === 'all') ? 'block' : 'none';
+            document.getElementById('free-products').style.display = (type === 'free' || type === 'all') ? 'block' : 'none';
+        }
+
+        // --- AUTHENTICATION ---
+        auth.onAuthStateChanged(user => {
+            const userLoggedInDiv = document.getElementById('user-logged-in');
+            const userLoggedOutDiv = document.getElementById('user-logged-out');
+            if (user) {
+                userLoggedInDiv.classList.remove('hidden');
+                userLoggedOutDiv.classList.add('hidden');
+                toggleModal('auth-modal', false);
+
+                db.ref(`users/${user.uid}`).on('value', snapshot => {
+                    const userData = snapshot.val();
+                    if (userData) {
+                        const name = userData.name || user.email;
+                        document.getElementById('user-name-btn').textContent = name.split(' ')[0];
+                        document.getElementById('user-profile-pic-nav').src = userData.photoURL || 'https://i.ibb.co/6yT1W9N/placeholder-user.png';
+                    }
+                });
+            } else {
+                userLoggedInDiv.classList.add('hidden');
+                userLoggedOutDiv.classList.remove('hidden');
+                if (visiblePage === 'dashboard' || visiblePage === 'profileEdit') {
+                    navigateTo('home');
+                }
+            }
+        });
+
+        function handleGoogleLogin() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).then(result => {
+                const user = result.user;
+                const userRef = db.ref('users/' + user.uid);
+                userRef.once('value', snapshot => {
+                    if (!snapshot.exists()) {
+                        userRef.set({
+                            name: user.displayName, email: user.email,
+                            phone: user.phoneNumber || '',
+                            photoURL: user.photoURL || 'https://i.ibb.co/6yT1W9N/placeholder-user.png',
+                            createdAt: firebase.database.ServerValue.TIMESTAMP
+                        });
+                    }
+                });
+            }).catch(e => alert("Google লগইন ব্যর্থ হয়েছে: " + e.message));
+        }
+
+        function handleEmailRegister() {
+            const name = document.getElementById('register-name').value;
+            const phone = document.getElementById('register-phone').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            if (!name || !phone || !email || !password) { alert("অনুগ্রহ করে সকল ঘর পূরণ করুন।"); return; }
+
+            auth.createUserWithEmailAndPassword(email, password).then(cred => {
+                db.ref('users/' + cred.user.uid).set({
+                    name: name, email: email, phone: phone,
+                    photoURL: 'https://i.ibb.co/6yT1W9N/placeholder-user.png',
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
+                });
+                alert("রেজিস্ট্রেশন সফল হয়েছে।");
+            }).catch(e => alert("রেজিস্ট্রেশন ব্যর্থ হয়েছে: " + e.message));
+        }
+
+        function handleEmailLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) { alert("ইমেল এবং পাসওয়ার্ড দিন।"); return; }
+            auth.signInWithEmailAndPassword(email, password).catch(e => alert("লগইন ব্যর্থ হয়েছে: " + e.message));
+        }
+
+        // --- PROFILE MANAGEMENT ---
+        function showProfileEditPage() {
+            const user = auth.currentUser;
+            if (!user) { navigateTo('home'); return; }
+
+            db.ref(`users/${user.uid}`).once('value', snapshot => {
+                const data = snapshot.val();
+                if (data) {
+                    document.getElementById('profile-edit-name').value = data.name || '';
+                    document.getElementById('profile-edit-phone').value = data.phone || '';
+                    document.getElementById('profile-edit-pic-preview').src = data.photoURL || 'https://i.ibb.co/6yT1W9N/placeholder-user.png';
+                }
+            });
+        }
+
+        function handleProfileUpdate() {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const name = document.getElementById('profile-edit-name').value;
+            const phone = document.getElementById('profile-edit-phone').value;
+            const file = document.getElementById('profile-pic-input').files[0];
+
+            db.ref(`users/${user.uid}`).update({ name, phone })
+                .then(() => {
+                    if (file) {
+                        uploadProfilePicture(user, file);
+                    } else {
+                        alert('আপনার তথ্য আপডেট হয়েছে।');
+                        navigateTo('dashboard');
+                    }
+                })
+                .catch(e => alert('তথ্য আপডেট করতে সমস্যা হয়েছে: ' + e.message));
+        }
+
+        function uploadProfilePicture(user, file) {
+            const filePath = `profile_pics/${user.uid}/${file.name}`;
+            const fileRef = storage.ref(filePath);
+            const uploadTask = fileRef.put(file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => { /* Can show progress here */ },
+                (error) => alert('ছবি আপলোড ব্যর্থ হয়েছে: ' + error.message),
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+                        db.ref(`users/${user.uid}`).update({ photoURL: downloadURL });
+                        document.getElementById('profile-edit-pic-preview').src = downloadURL;
+                        alert('আপনার প্রোফাইল ছবি ও তথ্য আপডেট হয়েছে।');
+                        navigateTo('dashboard');
+                    });
+                }
+            );
+        }
+
+        // --- DATA FETCHING & RENDERING ---
+        function fetchSiteSettings() {
+            db.ref('allcoding-app/config').once('value', s => {
+                if (s.exists()) {
+                    const data = s.val();
+                    const siteName = data.siteName || 'AppSmart';
+                    document.title = siteName + ' - আপনার পছন্দের সোর্স কোড';
+                    document.getElementById('nav-brand').textContent = siteName;
+                    document.getElementById('footer-site-name').textContent = siteName;
+                    document.getElementById('footer-site-name-copy').textContent = siteName;
+
+                    if (data.popupEnabled === true && data.popupMessage && !sessionStorage.getItem('popupShownThisSession')) {
+                        document.getElementById('popup-message-content').textContent = data.popupMessage;
+                        toggleModal('welcome-popup-modal', true);
+                        sessionStorage.setItem('popupShownThisSession', 'true');
+                    }
+                }
+            });
+            db.ref('allcoding-app/siteInfo').once('value', s => {
+                if (s.exists()) {
+                    const data = s.val();
+                    document.getElementById('footer-fb').href = data.facebookUrl || '#';
+                    document.getElementById('footer-tg').href = data.telegramUrl || '#';
+                    document.getElementById('footer-yt').href = data.youtubeUrl || '#';
+                }
+            });
+        }
+
+        function fetchProducts(type, containerId) {
+            const path = type === 'premium' ? 'allcoding-app/premiumCodings' : 'allcoding-app/freeCodings';
+            const container = document.getElementById(containerId);
+            db.ref(path).on('value', snapshot => {
+                container.innerHTML = '';
+                snapshot.forEach(item => {
+                    if (item.key === 'placeholder') return; // Skip placeholder
+                    const product = { id: item.key, ...item.val() };
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.onclick = () => navigateTo('productDetail', { id: product.id, type: type });
+                    card.innerHTML = `
+                        <img src="${product.listImageUrl}" alt="${product.name}" class="product-card-img">
+                        <div class="product-card-body">
+                            <h3 class="product-card-title">${product.name}</h3>
+                            <div class="product-card-footer">
+                                <span class="${type === 'premium' ? 'product-card-price' : 'product-card-tag'}">
+                                    ${type === 'premium' ? (product.price ? `৳ ${product.price}` : 'N/A') : 'ফ্রি'}
+                                </span>
+                            </div>
+                        </div>`;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        async function checkIfProductIsPurchased(productId) {
+            const user = auth.currentUser;
+            if (!user) return false;
+
+            const snapshot = await db.ref(`orders/${user.uid}`).orderByChild('productId').equalTo(productId).once('value');
+            if (!snapshot.exists()) return false;
+
+            let isPurchasedAndCompleted = false;
+            snapshot.forEach(orderItem => {
+                if (orderItem.val().status === 'completed') {
+                    isPurchasedAndCompleted = true;
+                }
+            });
+            return isPurchasedAndCompleted;
+        }
+
+        async function showProductDetail(productId, type) {
+            const path = type === 'premium' ? `allcoding-app/premiumCodings/${productId}` : `allcoding-app/freeCodings/${productId}`;
+            const productSnapshot = await db.ref(path).once('value');
+            if (!productSnapshot.exists()) {
+                document.getElementById('product-detail-content').innerHTML = `<h1>প্রোডাক্ট পাওয়া যায়নি।</h1>`;
+                return;
+            }
+            const product = { id: productId, type: type, ...productSnapshot.val() };
+            const content = document.getElementById('product-detail-content');
+
+            let actionButtonHTML = '';
+            const isPurchased = await checkIfProductIsPurchased(productId);
+
+            if (type === 'premium') {
+                if (isPurchased) {
+                    const user = auth.currentUser;
+                    const orderSnapshot = await db.ref(`orders/${user.uid}`).orderByChild('productId').equalTo(productId).once('value');
+                    let downloadUrl = '#';
+                    orderSnapshot.forEach(item => {
+                        const orderData = item.val();
+                        if (orderData.status === 'completed' && orderData.downloadUrl) {
+                            downloadUrl = orderData.downloadUrl;
+                        }
+                    });
+                    actionButtonHTML = `<a href="${downloadUrl}" target="_blank" class="download-btn"><i class="fas fa-download"></i> ডাউনলোড করুন</a>`;
+                } else {
+                    actionButtonHTML = `<button class="buy-btn" id="buy-now-btn"><i class="fas fa-shopping-cart"></i> এখনি কিনুন (৳ ${product.price})</button>`;
+                }
+            } else {
+                actionButtonHTML = `<a href="${product.downloadUrl}" target="_blank" class="download-btn"><i class="fas fa-download"></i> ডাউনলোড করুন</a>`;
+            }
+
+            let videoHTML = product.videoUrl ? `<h3>প্রোডাক্ট ভিডিও</h3><div class="product-video"><iframe src="${product.videoUrl.replace("watch?v=", "embed/")}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>` : '';
+
+            let screenshotsHTML = '<h3>স্ক্রিনশট</h3>';
+            let hasScreenshots = false;
+            if (product.screenshot1Url) { screenshotsHTML += `<img src="${product.screenshot1Url}" alt="Screenshot 1">`; hasScreenshots = true; }
+            if (product.screenshot2Url) { screenshotsHTML += `<img src="${product.screenshot2Url}" alt="Screenshot 2">`; hasScreenshots = true; }
+            if (product.screenshot3Url) { screenshotsHTML += `<img src="${product.screenshot3Url}" alt="Screenshot 3">`; hasScreenshots = true; }
+
+            content.innerHTML = `
+                <div class="product-detail-layout">
+                    <div class="product-images">
+                        <img src="${product.listImageUrl}" alt="${product.name}">
+                        ${videoHTML}
+                        ${hasScreenshots ? screenshotsHTML : ''}
+                    </div>
+                    <div class="product-info">
+                        <h1>${product.name}</h1>
+                        ${type === 'premium' ? `<div class="price">৳ ${product.price}</div>` : ''}
+                        <h3>ডেসক্রিপশন</h3>
+                        <p>${product.description.replace(/\n/g, '<br>')}</p>
+                        <div id="action-button-container" style="margin-top: 25px;">${actionButtonHTML}</div>
+                    </div>
+                </div>`;
+
+            if (type === 'premium' && !isPurchased) {
+                const buyNowBtn = document.getElementById('buy-now-btn');
+                if (buyNowBtn) {
+                    buyNowBtn.onclick = () => handlePurchase(product);
+                }
+            }
+        }
+
+        function showUserDashboard() {
+            const user = auth.currentUser;
+            if (!user) { toggleModal('auth-modal', true); return; }
+
+            const container = document.getElementById('purchased-items-list');
+            db.ref(`orders/${user.uid}`).orderByChild('orderDate').on('value', snapshot => {
+                container.innerHTML = '';
+                if (!snapshot.exists()) {
+                    container.innerHTML = '<p>আপনি এখনো কিছু কেনেননি।</p>'; return;
+                }
+                let orderedItems = [];
+                snapshot.forEach(orderItem => orderedItems.push({key: orderItem.key, ...orderItem.val()}));
+                orderedItems.reverse(); // Show newest first
+
+                orderedItems.forEach(order => {
+                    const orderDate = new Date(order.orderDate).toLocaleDateString('bn-BD');
+                    let detailsHTML = '';
+                    if (order.status === 'completed') {
+                        detailsHTML = `
+                            ${order.licenseKey ? `<div class="license-key" id="license-key-${order.key}"><span>লাইসেন্স কী: ${order.licenseKey}</span><button class="copy-btn" onclick="copyToClipboard('license-key-${order.key} span')"><i class="fas fa-copy"></i></button></div>` : ''}
+                            ${order.downloadUrl ? `<a href="${order.downloadUrl}" target="_blank" class="download-btn" style="margin-top: 10px;">সোর্স কোড ডাউনলোড</a>` : ''}
+                        `;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'order-card';
+                    card.innerHTML = `
+                        <h3>${order.productName}</h3>
+                        <p>স্ট্যাটাস: <strong>${order.status === 'completed' ? 'অনুমোদিত' : (order.status === 'payment_submitted' ? 'রিভিউ চলছে' : 'পেন্ডিং')}</strong></p>
+                        <p>অর্ডারের তারিখ: ${orderDate}</p>
+                        <p>ট্রানজেকশন আইডি: ${order.transactionId}</p>
+                        <p>পেমেন্ট নম্বর: ${order.paymentPhoneNumber || 'N/A'}</p>
+                        ${detailsHTML}`;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        // --- E-COMMERCE & UTILITIES ---
+        function handlePurchase(product) {
+            const user = auth.currentUser;
+            if (!user) { alert("প্রোডাক্ট কিনতে লগইন করুন।"); toggleModal('auth-modal', true); return; }
+
+            currentProductForPayment = product;
+            document.getElementById('payment-product-name').textContent = `${product.name} এর জন্য পেমেন্ট করুন`;
+            document.getElementById('payment-price').textContent = `৳ ${product.price}`;
+            toggleModal('payment-modal', true);
+        }
+
+        function submitPayment() {
+            const user = auth.currentUser;
+            const transactionId = document.getElementById('transaction-id').value;
+            const paymentPhoneNumber = document.getElementById('payment-phone-number').value;
+
+            if (!transactionId || !paymentPhoneNumber) { alert("অনুগ্রহ করে পেমেন্ট নম্বর এবং ট্রানজেকশন আইডি দিন।"); return; }
+            if (!user || !currentProductForPayment) return;
+
+            const orderId = db.ref().child('orders').push().key;
+            db.ref(`orders/${user.uid}/${orderId}`).set({
+                productId: currentProductForPayment.id,
+                productName: currentProductForPayment.name,
+                productType: currentProductForPayment.type, // Added product type
+                price: currentProductForPayment.price,
+                transactionId: transactionId,
+                paymentPhoneNumber: paymentPhoneNumber,
+                status: 'payment_submitted',
+                orderDate: firebase.database.ServerValue.TIMESTAMP,
+                userId: user.uid
+            }).then(() => {
+                alert("আপনার পেমেন্ট রিকুয়েস্ট সাবমিট হয়েছে। অ্যাডমিন রিভিউ করে দ্রুত অনুমোদন করবেন।");
+                toggleModal('payment-modal', false);
+                document.getElementById('transaction-id').value = '';
+                document.getElementById('payment-phone-number').value = '';
+                navigateTo('dashboard');
+            }).catch(e => alert("ত্রুটি: " + e.message));
+        }
+
+        function toggleModal(modalId, show) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.toggle('hidden', !show);
+        }
+
+        // --- EVENT LISTENERS ---
+        function setupEventListeners() {
+            document.getElementById('nav-brand').addEventListener('click', (e) => { e.preventDefault(); navigateTo('home'); });
+            document.getElementById('nav-home').addEventListener('click', (e) => { e.preventDefault(); filterProducts('all'); });
+            document.getElementById('nav-premium').addEventListener('click', (e) => { e.preventDefault(); filterProducts('premium'); });
+            document.getElementById('nav-free').addEventListener('click', (e) => { e.preventDefault(); filterProducts('free'); });
+            document.getElementById('dashboard-link').addEventListener('click', (e) => { e.preventDefault(); navigateTo('dashboard'); });
+            document.getElementById('profile-edit-link').addEventListener('click', (e) => { e.preventDefault(); navigateTo('profileEdit'); });
+
+            document.getElementById('login-btn').addEventListener('click', () => toggleModal('auth-modal', true));
+            document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.onclick = (e) => toggleModal(e.target.dataset.modalId, false);
+            });
+            document.getElementById('popup-close-btn').addEventListener('click', () => toggleModal('welcome-popup-modal', false));
+
+            document.getElementById('show-register-form').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('login-form').classList.add('hidden'); document.getElementById('register-form').classList.remove('hidden'); });
+            document.getElementById('show-login-form').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('login-form').classList.remove('hidden'); document.getElementById('register-form').classList.add('hidden'); });
+            document.getElementById('google-login-btn').addEventListener('click', handleGoogleLogin);
+            document.getElementById('register-submit-btn').addEventListener('click', handleEmailRegister);
+            document.getElementById('login-submit-btn').addEventListener('click', handleEmailLogin);
+
+            document.getElementById('profile-save-btn').addEventListener('click', handleProfileUpdate);
+            document.getElementById('profile-pic-input').addEventListener('change', (e) => { if (e.target.files && e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => document.getElementById('profile-edit-pic-preview').src = ev.target.result; reader.readAsDataURL(e.target.files[0]); } });
+
+            document.getElementById('submit-payment-btn').addEventListener('click', submitPayment);
+            document.getElementById('navbar-toggle-btn').addEventListener('click', () => { document.getElementById('nav-links-container').classList.toggle('active'); });
+            document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+        }
+
+        // --- THEME & SLIDER ---
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('#theme-toggle-btn i');
+            body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+            icon.className = body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        function applyInitialTheme() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelector('#theme-toggle-btn i').className = 'fas fa-sun';
+            }
+        }
+
+        function fetchAndRenderSlider() {
+            const sliderContainer = document.getElementById('banner-slider-container');
+            db.ref('allcoding-app/sliderBanners').once('value', snapshot => {
+                if (!snapshot.exists()) { sliderContainer.style.display = 'none'; return; };
+                sliderContainer.innerHTML = `<div class="slider-wrapper"></div><div class="slider-nav"><button id="prev-slide">&lt;</button><button id="next-slide">&gt;</button></div>`;
+                const wrapper = sliderContainer.querySelector('.slider-wrapper');
+                snapshot.forEach(slideData => {
+                    const slideInfo = slideData.val();
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.innerHTML = slideInfo.targetUrl ? `<a href="${slideInfo.targetUrl}" target="_blank"><img src="${slideInfo.imageUrl}" alt="Banner"></a>` : `<img src="${slideInfo.imageUrl}" alt="Banner">`;
+                    wrapper.appendChild(slide);
+                });
+                initSlider();
+            });
+        }
+
+        function initSlider() {
+            const wrapper = document.querySelector('.slider-wrapper');
+            if (!wrapper) return;
+            const slides = document.querySelectorAll('.slide');
+            const nextBtn = document.getElementById('next-slide');
+            const prevBtn = document.getElementById('prev-slide');
+            if (!slides || slides.length <= 1) { if(nextBtn) {nextBtn.style.display = 'none'; prevBtn.style.display = 'none';} return; };
+
+            let currentIndex = 0;
+            let slideInterval = setInterval(nextSlide, 5000);
+            function goToSlide(index) {
+                currentIndex = (index + slides.length) % slides.length;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+            function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); }
+            nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+            prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+        }
+
+
+        // --- INITIALIZE APP ---
+        document.addEventListener('DOMContentLoaded', () => {
+            applyInitialTheme();
+            setupEventListeners();
+            fetchSiteSettings();
+            fetchPaymentMethods();
+            fetchAndRenderSlider();
+            fetchProducts('premium', 'premium-products-grid');
+            fetchProducts('free', 'free-products-grid');
+            navigateTo('home');
+        });
+
+    </script>
+</body>
+</html>
