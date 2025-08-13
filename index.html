@@ -86,6 +86,52 @@
         .navbar-logo {
             height: 45px;
         }
+        
+        /* নতুন সংযোজন: সার্চ বারের স্টাইল */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 350px; /* আপনার পছন্দ মতো প্রস্থ পরিবর্তন করতে পারেন */
+            margin: 0 20px; /* ডানে-বামে স্পেস তৈরি */
+        }
+
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 10px 40px 10px 20px; /* ডানদিকে বাটনের জন্য জায়গা রাখা হয়েছে */
+            border: 1px solid var(--border-color);
+            border-radius: 25px; /* গোলাকার লুকের জন্য */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        .search-container button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            padding: 0 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            transition: color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            color: var(--primary-color);
+        }
+
 
         .nav-links {
             display: flex;
@@ -98,6 +144,7 @@
             margin: 0 15px;
             font-weight: 500;
             transition: color 0.3s ease;
+            white-space: nowrap; /* লেখাগুলো যেন না ভাঙে */
         }
 
         .nav-links a:hover,
@@ -788,46 +835,10 @@
             text-align: center;
         }
         
-       /* নতুন সংযোজন: পেমেন্ট পেজের জন্য স্টাইল */
-        #payment-page .container {
-            max-width: 700px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-
-        #payment-form-container {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-            /* প্রয়োজনীয়তা ১: ফর্ম স্ক্রলযোগ্য করা */
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        #payment-form-container input[type="tel"],
-        #payment-form-container input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            box-sizing: border-box;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        #payment-form-container button {
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
         @media (max-width: 992px) {
-
+            .search-container {
+                width: 250px; /* ট্যাবলেটের জন্য প্রস্থ কমানো */
+            }
             .dashboard-grid,
             .profile-edit-grid {
                 grid-template-columns: 1fr;
@@ -840,6 +851,10 @@
         }
 
         @media (max-width: 768px) {
+            /* নতুন সংযোজন: ছোট স্ক্রিনে সার্চ বার লুকিয়ে রাখা */
+            .search-container {
+                display: none;
+            }
             .navbar-toggle {
                 display: block;
                 margin-left: 15px;
@@ -888,6 +903,13 @@
             <img id="navbar-logo-img" src="https://i.postimg.cc/7YJ2wBqs/fainappbg.png" alt="AppSmart Logo" class="navbar-logo">
             <span id="navbar-site-name">AppSmart</span>
         </a>
+        
+        <!-- নতুন সংযোজন: সার্চ বার -->
+        <div class="search-container">
+            <input type="text" placeholder="অনুসন্ধান করুন...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+
         <div class="nav-links" id="nav-links-container">
             <a href="#" id="nav-home">হোম</a>
             <a href="#" id="nav-premium">প্রিমিয়াম কোড</a>
@@ -987,47 +1009,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- নতুন সংযোজন: পেমেন্ট পেজ -->
-        <div id="payment-page" class="hidden">
-            <div class="container">
-                <h2 class="section-heading" id="payment-page-heading">পেমেন্ট প্রক্রিয়া</h2>
-                <div id="payment-form-container">
-                    <div id="payment-instructions">
-                        <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction-page"></span></strong> পেমেন্ট করুন (Send Money) এবং মাধ্যমটি সিলেক্ট করুন।</p>
-                        <div id="payment-methods-container-page">
-                            <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->
-                        </div>
-                        <br>
-                        <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
-                    </div>
-
-                    <div id="price-summary-page">
-                        <p><span>মূল দাম:</span> <span id="original-price-summary-page"></span></p>
-                        <p id="discount-summary-page" class="hidden"><span>ডিসকাউন্ট:</span> <span id="discount-amount-summary-page"></span></p>
-                        <hr>
-                        <p><strong>সর্বমোট:</strong> <strong id="final-price-summary-page"></strong></p>
-                    </div>
-
-                    <div id="promo-section-page">
-                        <label for="promo-code-page">প্রোমো কোড (থাকলে দিন)</label>
-                        <div class="promo-input-group">
-                            <input type="text" id="promo-code-page" placeholder="PROMO CODE">
-                            <button id="apply-promo-btn-page" class="secondary-btn">প্রয়োগ</button>
-                        </div>
-                    </div>
-                    
-                    <input type="tel" id="payment-phone-number-page" placeholder="যে নম্বর থেকে পেমেন্ট করেছেন" required>
-                    <input type="text" id="transaction-id-page" placeholder="আপনার পেমেন্ট Transaction ID লিখুন" required>
-
-                    <div style="margin-top: 20px; display: flex; gap: 15px;">
-                        <button id="submit-payment-btn-page" class="primary-btn" style="flex-grow: 1;">পেমেন্ট নিশ্চিত করুন</button>
-                        <button id="payment-back-btn" class="secondary-btn" style="flex-grow: 1;">ফিরে যান</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
 
     <footer class="footer">
@@ -1160,11 +1141,9 @@
         let currentProductForPayment = null;
         let visiblePage = 'home';
         let currentDiscount = { code: null, amount: 0 };
-        let lastProductDetailContext = null; // নতুন সংযোজন: শেষ দেখা প্রোডাক্টের তথ্য সংরক্ষণ
 
         const elements = {
-            // নতুন সংযোজন: পেমেন্ট পেজ যুক্ত করা
-            pages: { home: document.getElementById('home-page'), productDetail: document.getElementById('product-detail-page'), dashboard: document.getElementById('user-dashboard-page'), profileEdit: document.getElementById('profile-edit-page'), payment: document.getElementById('payment-page') },
+            pages: { home: document.getElementById('home-page'), productDetail: document.getElementById('product-detail-page'), dashboard: document.getElementById('user-dashboard-page'), profileEdit: document.getElementById('profile-edit-page'), },
             modals: { auth: document.getElementById('auth-modal'), payment: document.getElementById('payment-modal'), welcome: document.getElementById('welcome-popup-modal'), },
         };
         
@@ -1177,59 +1156,51 @@
         // পরিবর্তন: পেমেন্ট মেথড এখন রেডিও বাটন হিসাবে দেখানো হবে
         function fetchPaymentMethods() {
             const paymentMethodsRef = db.ref('allcoding-app/config/paymentMethods');
-            // পরিবর্তন: দুটি কন্টেইনারেই মেথড যোগ করা
-            const containers = [document.getElementById('payment-methods-container'), document.getElementById('payment-methods-container-page')];
-            
             paymentMethodsRef.on('value', (snapshot) => {
-                containers.forEach(container => {
-                    if (!container) return;
-                    container.innerHTML = '';
-                    if (snapshot.exists() && snapshot.val() !== null) {
-                        snapshot.forEach(childSnapshot => {
-                            const method = childSnapshot.val();
-                            const methodKey = childSnapshot.key;
-                            if(method.name && method.number && method.logoUrl) {
-                                const optionDiv = document.createElement('div');
-                                optionDiv.className = 'payment-option';
-                                // আইডি ইউনিক করতে কন্টেইনারের আইডি ব্যবহার
-                                const uniqueId = `method-${methodKey}-${container.id}`;
-                                optionDiv.innerHTML = `
-                                    <input type="radio" id="${uniqueId}" name="payment-method-radio" value="${method.name}" required>
-                                    <label for="${uniqueId}">
-                                        <img src="${method.logoUrl}" alt="${method.name} Logo">
-                                        <span>${method.name}: ${method.number}</span>
-                                        <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('${method.number}')"><i class="fas fa-copy"></i></button>
-                                    </label>
-                                `;
-                                container.appendChild(optionDiv);
-                            }
-                        });
-                    } else {
-                        // নতুন লোগো এবং রেডিও বাটন সহ ফলব্যাক
-                        container.innerHTML = `
-                            <div class="payment-option">
-                                <input type="radio" id="method-bkash-${container.id}" name="payment-method-radio" value="bKash" required>
-                                <label for="method-bkash-${container.id}">
-                                    <img src="https://i.postimg.cc/q7DqRXtR/th.jpg" alt="bKash Logo">
-                                    <span>বিকাশ: 01613927674</span>
-                                    <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
+                const container = document.getElementById('payment-methods-container');
+                container.innerHTML = '';
+                if (snapshot.exists() && snapshot.val() !== null) {
+                    snapshot.forEach(childSnapshot => {
+                        const method = childSnapshot.val();
+                        const methodKey = childSnapshot.key;
+                        if(method.name && method.number && method.logoUrl) {
+                            const optionDiv = document.createElement('div');
+                            optionDiv.className = 'payment-option';
+                            optionDiv.innerHTML = `
+                                <input type="radio" id="method-${methodKey}" name="payment-method-radio" value="${method.name}" required>
+                                <label for="method-${methodKey}">
+                                    <img src="${method.logoUrl}" alt="${method.name} Logo">
+                                    <span>${method.name}: ${method.number}</span>
+                                    <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('${method.number}')"><i class="fas fa-copy"></i></button>
                                 </label>
-                            </div>
-                            <div class="payment-option">
-                                <input type="radio" id="method-nagad-${container.id}" name="payment-method-radio" value="Nagad" required>
-                                <label for="method-nagad-${container.id}">
-                                    <img src="https://i.postimg.cc/4dDBFnvf/OIP.webp" alt="Nagad Logo">
-                                    <span>নগদ: 01613927674</span>
-                                    <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
-                                </label>
-                            </div>
-                        `;
-                    }
-                });
+                            `;
+                            container.appendChild(optionDiv);
+                        }
+                    });
+                } else {
+                    // নতুন লোগো এবং রেডিও বাটন সহ ফলব্যাক
+                    container.innerHTML = `
+                        <div class="payment-option">
+                            <input type="radio" id="method-bkash" name="payment-method-radio" value="bKash" required>
+                            <label for="method-bkash">
+                                <img src="https://i.postimg.cc/q7DqRXtR/th.jpg" alt="bKash Logo">
+                                <span>বিকাশ: 01613927674</span>
+                                <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
+                            </label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="method-nagad" name="payment-method-radio" value="Nagad" required>
+                            <label for="method-nagad">
+                                <img src="https://i.postimg.cc/4dDBFnvf/OIP.webp" alt="Nagad Logo">
+                                <span>নগদ: 01613927674</span>
+                                <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
+                            </label>
+                        </div>
+                    `;
+                }
             });
         }
         
-        // পরিবর্তন: ন্যাভিগেশন ফাংশন আপডেট করা
         function navigateTo(pageName, context) {
             Object.values(elements.pages).forEach(page => page.classList.add('hidden'));
             if (elements.pages[pageName]) {
@@ -1237,15 +1208,9 @@
                 visiblePage = pageName;
                 window.scrollTo(0, 0);
 
-                if (pageName === 'productDetail' && context) {
-                    showProductDetail(context.id, context.type);
-                    lastProductDetailContext = context; // ফিরে আসার জন্য কনটেক্সট সেভ করা
-                }
+                if (pageName === 'productDetail' && context) showProductDetail(context.id, context.type);
                 if (pageName === 'dashboard') showUserDashboard();
                 if (pageName === 'profileEdit') showProfileEditPage();
-                if (pageName === 'payment' && context) { // পেমেন্ট পেজের জন্য নতুন লজিক
-                    showPaymentPage(context.product);
-                }
             }
             document.getElementById('nav-links-container').classList.remove('active');
         }
@@ -1275,7 +1240,7 @@
             } else {
                 userLoggedInDiv.classList.add('hidden');
                 userLoggedOutDiv.classList.remove('hidden');
-                if (visiblePage === 'dashboard' || visiblePage === 'profileEdit' || visiblePage === 'payment') {
+                if (visiblePage === 'dashboard' || visiblePage === 'profileEdit') {
                     navigateTo('home');
                 }
             }
@@ -1490,8 +1455,7 @@
         }
 
         async function applyPromoCode() {
-            // আইডিগুলো নতুন পেজের জন্য পরিবর্তন করা হয়েছে
-            const codeInput = document.getElementById('promo-code-page').value.trim().toUpperCase();
+            const codeInput = document.getElementById('promo-code').value.trim().toUpperCase();
             if (!codeInput) {
                 alert("অনুগ্রহ করে একটি প্রোমো কোড লিখুন।");
                 return;
@@ -1521,53 +1485,42 @@
             const originalPrice = currentProductForPayment.price;
             const finalPrice = Math.max(0, originalPrice - currentDiscount.amount);
 
-            // নতুন পেজের আইডি ব্যবহার করা
-            document.getElementById('original-price-summary-page').textContent = `৳ ${originalPrice}`;
-            document.getElementById('final-price-summary-page').textContent = `৳ ${finalPrice}`;
-            document.getElementById('payment-price-instruction-page').textContent = `৳ ${finalPrice}`;
+            document.getElementById('original-price-summary').textContent = `৳ ${originalPrice}`;
+            document.getElementById('final-price-summary').textContent = `৳ ${finalPrice}`;
+            document.getElementById('payment-price-instruction').textContent = `৳ ${finalPrice}`;
 
-            const discountSummaryEl = document.getElementById('discount-summary-page');
+            const discountSummaryEl = document.getElementById('discount-summary');
             if (currentDiscount.amount > 0) {
-                document.getElementById('discount-amount-summary-page').textContent = `- ৳ ${currentDiscount.amount}`;
+                document.getElementById('discount-amount-summary').textContent = `- ৳ ${currentDiscount.amount}`;
                 discountSummaryEl.classList.remove('hidden');
             } else {
                 discountSummaryEl.classList.add('hidden');
             }
         }
-        
-        // নতুন সংযোজন: পেমেন্ট পেজ দেখানোর ফাংশন
-        function showPaymentPage(product) {
-            currentProductForPayment = product;
-            currentDiscount = { code: null, amount: 0 };
-            document.getElementById('promo-code-page').value = '';
-            document.getElementById('payment-phone-number-page').value = '';
-            document.getElementById('transaction-id-page').value = '';
 
-            const selectedRadio = document.querySelector('#payment-page input[name="payment-method-radio"]:checked');
-            if (selectedRadio) selectedRadio.checked = false;
-            
-            document.getElementById('payment-page-heading').textContent = `${product.name} এর জন্য পেমেন্ট করুন`;
-            updatePriceSummary();
-        }
-
-        // পরিবর্তন: handlePurchase ফাংশন এখন শুধু নেভিগেট করবে
         function handlePurchase(product) {
             const user = auth.currentUser;
-            if (!user) {
-                alert("প্রোডাক্ট কিনতে লগইন করুন।");
-                toggleModal('auth-modal', true);
-                return;
-            }
-            navigateTo('payment', { product: product });
+            if (!user) { alert("প্রোডাক্ট কিনতে লগইন করুন।"); toggleModal('auth-modal', true); return; }
+            
+            currentProductForPayment = product;
+            currentDiscount = { code: null, amount: 0 };
+            document.getElementById('promo-code').value = '';
+
+            const selectedRadio = document.querySelector('input[name="payment-method-radio"]:checked');
+            if (selectedRadio) selectedRadio.checked = false;
+            
+            document.getElementById('payment-product-name').textContent = `${product.name} এর জন্য পেমেন্ট করুন`;
+            
+            updatePriceSummary();
+            toggleModal('payment-modal', true);
         }
 
-
-        // পরিবর্তন: submitPayment ফাংশনটি নতুন পেজের ইনপুট থেকে তথ্য নিবে
+        // পরিবর্তন: submitPayment ফাংশনটি রেডিও বাটন থেকে তথ্য নিবে
         function submitPayment() {
             const user = auth.currentUser;
-            const transactionId = document.getElementById('transaction-id-page').value;
-            const paymentPhoneNumber = document.getElementById('payment-phone-number-page').value;
-            const selectedPaymentRadio = document.querySelector('#payment-page input[name="payment-method-radio"]:checked');
+            const transactionId = document.getElementById('transaction-id').value;
+            const paymentPhoneNumber = document.getElementById('payment-phone-number').value;
+            const selectedPaymentRadio = document.querySelector('input[name="payment-method-radio"]:checked');
             const paymentMethodUsed = selectedPaymentRadio ? selectedPaymentRadio.value : null;
 
             if (!paymentMethodUsed) { alert("আপনি কোন মাধ্যমে পেমেন্ট করেছেন, তা সিলেক্ট করুন।"); return; }
@@ -1593,6 +1546,10 @@
                 userId: user.uid
             }).then(() => {
                 alert("আপনার পেমেন্ট রিকুয়েস্ট সাবমিট হয়েছে। অ্যাডমিন রিভিউ করে দ্রুত অনুমোদন করবেন।");
+                toggleModal('payment-modal', false);
+                document.getElementById('transaction-id').value = '';
+                document.getElementById('payment-phone-number').value = '';
+                if (selectedPaymentRadio) selectedPaymentRadio.checked = false;
                 navigateTo('dashboard');
             }).catch(e => alert("ত্রুটি: " + e.message));
         }
@@ -1619,24 +1576,10 @@
             document.getElementById('login-submit-btn').addEventListener('click', handleEmailLogin);
             document.getElementById('profile-save-btn').addEventListener('click', handleProfileUpdate);
             document.getElementById('profile-pic-input').addEventListener('change', (e) => { if (e.target.files && e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => document.getElementById('profile-edit-pic-preview').src = ev.target.result; reader.readAsDataURL(e.target.files[0]); } });
-            
-            // পুরনো মোডালের বাটন (শুধুমাত্র সামঞ্জস্য রাখার জন্য)
             document.getElementById('submit-payment-btn').addEventListener('click', submitPayment);
-            document.getElementById('apply-promo-btn').addEventListener('click', applyPromoCode);
-
-            // নতুন পেমেন্ট পেজের জন্য ইভেন্ট লিসেনার
-            document.getElementById('submit-payment-btn-page').addEventListener('click', submitPayment);
-            document.getElementById('apply-promo-btn-page').addEventListener('click', applyPromoCode);
-            document.getElementById('payment-back-btn').addEventListener('click', () => {
-                if (lastProductDetailContext) {
-                    navigateTo('productDetail', lastProductDetailContext);
-                } else {
-                    navigateTo('home');
-                }
-            });
-
             document.getElementById('navbar-toggle-btn').addEventListener('click', () => { document.getElementById('nav-links-container').classList.toggle('active'); });
             document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+            document.getElementById('apply-promo-btn').addEventListener('click', applyPromoCode);
         }
 
         function toggleTheme() {
