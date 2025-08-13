@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AppSmart - আপনার পছন্দের সোর্স কোড</title>
+    <link rel="icon" href="https://i.postimg.cc/pVFWd3nF/hhgapbg.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* General Styling & Variables */
@@ -23,7 +24,6 @@
             --danger-color: #dc3545;
         }
 
-        /* ########## নতুন: ডার্ক থিম ভ্যারিয়েবল ########## */
         body.dark-theme {
             --primary-color: #0d8eff;
             --secondary-color: #f1f1f1;
@@ -42,7 +42,6 @@
             color: var(--text-color);
             line-height: 1.7;
             padding-top: 70px;
-            /* Space for fixed navbar */
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -79,6 +78,13 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-logo {
+            height: 45px;
         }
 
         .nav-links {
@@ -104,7 +110,6 @@
             align-items: center;
         }
 
-        /* ########## নতুন: ডার্ক মোড টগল বাটন ########## */
         #theme-toggle-btn {
             background: none;
             border: none;
@@ -193,7 +198,6 @@
             color: var(--text-color);
         }
 
-        /* ########## নতুন: ব্যানার স্লাইডার স্টাইল ########## */
         .slider-container {
             width: 100%;
             max-width: 1200px;
@@ -202,7 +206,6 @@
             overflow: hidden;
             border-radius: 10px;
             height: 400px;
-            /* Adjust height as needed */
         }
 
         .slider-wrapper {
@@ -256,7 +259,6 @@
             }
         }
 
-        /* Section Heading */
         .section-heading {
             text-align: center;
             margin-bottom: 40px;
@@ -276,7 +278,6 @@
             border-radius: 2px;
         }
 
-        /* Product Grid & Cards */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -338,7 +339,6 @@
             font-size: 1rem;
         }
 
-        /* Product Detail Page */
         .product-detail-layout {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -356,7 +356,6 @@
         .product-video {
             position: relative;
             padding-bottom: 56.25%;
-            /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
             border-radius: 10px;
@@ -406,7 +405,6 @@
             background-color: #218838;
         }
 
-        /* User Dashboard & Profile Edit */
         .dashboard-grid,
         .profile-edit-grid {
             display: grid;
@@ -475,7 +473,6 @@
             align-items: center;
         }
 
-        /* Profile Edit Form */
         .profile-pic-uploader {
             display: flex;
             flex-direction: column;
@@ -512,7 +509,6 @@
             color: var(--text-color);
         }
 
-        /* Modal (Login/Register/Payment/Popup) */
         .modal {
             position: fixed;
             z-index: 1001;
@@ -603,7 +599,6 @@
             background-color: #c33d2e;
         }
 
-        /* Payment Modal Specifics */
         #payment-instructions {
             text-align: left;
             background: var(--bg-color);
@@ -649,7 +644,6 @@
             opacity: 0.7;
         }
 
-        /* ########## উন্নত গ্রাফিক্যাল পপ-আপ ########## */
         #welcome-popup-modal .modal-content {
             border-top: none;
             border-radius: 15px;
@@ -731,7 +725,32 @@
             margin: 0 10px;
         }
 
-        /* Responsive Design */
+        /* ########## নতুন: ফুটার লোগো এবং ইমেলের জন্য স্টাইল ########## */
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* লোগো এবং টেক্সটের মধ্যে স্পেস */
+            text-decoration: none;
+            color: var(--accent-color); /* নামটি হাইলাইট করার জন্য */
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            height: 40px; /* ফুটারে লোগোর উচ্চতা */
+            width: auto;
+        }
+
+        .footer-brand span {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .footer-section a i {
+            margin-right: 8px; /* আইকন এবং টেক্সটের মধ্যে স্পেস */
+            width: 20px; /* আইকনের জন্য নির্দিষ্ট জায়গা */
+            text-align: center;
+        }
+        
         @media (max-width: 992px) {
 
             .dashboard-grid,
@@ -761,7 +780,6 @@
                 padding: 10px 0;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
                 display: none;
-                /* Initially hidden */
                 border-top: 1px solid var(--border-color);
             }
 
@@ -790,7 +808,10 @@
 <body>
 
     <nav class="navbar">
-        <a href="#" id="nav-brand" class="navbar-brand">AppSmart</a>
+        <a href="#" class="navbar-brand">
+            <img src="https://i.postimg.cc/pVFWd3nF/hhgapbg.png" alt="AppSmart Logo" class="navbar-logo">
+            <span>AppSmart</span>
+        </a>
         <div class="nav-links" id="nav-links-container">
             <a href="#" id="nav-home">হোম</a>
             <a href="#" id="nav-premium">প্রিমিয়াম কোড</a>
@@ -825,7 +846,6 @@
     </nav>
 
     <main id="app">
-
         <!-- Home Page -->
         <div id="home-page">
             <div id="banner-slider-container" class="container"></div>
@@ -894,16 +914,24 @@
 
     <footer class="footer">
         <div class="container footer-content">
+            <!-- ########## পরিবর্তিত: ফুটার লোগো এবং নাম ########## -->
             <div class="footer-section">
-                <h3 id="footer-site-name">AppSmart</h3>
+                <a href="#" class="footer-brand">
+                    <img src="https://i.postimg.cc/7YJ2wBqs/fainappbg.png" alt="AppSmart Logo" class="footer-logo">
+                    <span id="footer-site-name">AppSmart</span>
+                </a>
                 <p>সেরা মানের সোর্স কোড কিনুন এবং আপনার স্বপ্নকে বাস্তবে রূপ দিন।</p>
             </div>
+            <!-- ########## পরিবর্তিত: ফুটার লিংক এবং ইমেল ########## -->
             <div class="footer-section">
                 <h3>গুরুত্বপূর্ণ লিংক</h3>
                 <a href="#">আমাদের সম্পর্কে</a><br>
-                <a href="#">যোগাযোগ</a><br>
-                <a href="#">শর্তাবলী</a>
+                <a href="#">শর্তাবলী</a><br>
+                <a href="mailto:your-email@example.com">
+                    <i class="fas fa-envelope"></i> ইমেইলে যোগাযোগ
+                </a>
             </div>
+            <!-- অপরিবর্তিত সেকশন -->
             <div class="footer-section">
                 <h3>সামাজিক মাধ্যম</h3>
                 <div class="footer-socials">
@@ -1017,7 +1045,6 @@
             modals: { auth: document.getElementById('auth-modal'), payment: document.getElementById('payment-modal'), welcome: document.getElementById('welcome-popup-modal'), },
         };
         
-        // --- ইউটিলিটি ফাংশন ---
         function copyToClipboard(elementId) {
             const textToCopy = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1032,7 +1059,6 @@
             paymentMethodsRef.on('value', (snapshot) => {
                 const bkashNumberEl = document.getElementById('payment-bkash-number');
                 const nagadNumberEl = document.getElementById('payment-nagad-number');
-                // ডিফল্ট নম্বর সেট করা
                 bkashNumberEl.innerText = '01613927674';
                 nagadNumberEl.innerText = '01613927674';
 
@@ -1050,7 +1076,6 @@
             });
         }
         
-        // --- NAVIGATION ---
         function navigateTo(pageName, context) {
             Object.values(elements.pages).forEach(page => page.classList.add('hidden'));
             if (elements.pages[pageName]) {
@@ -1071,7 +1096,6 @@
             document.getElementById('free-products').style.display = (type === 'free' || type === 'all') ? 'block' : 'none';
         }
 
-        // --- AUTHENTICATION ---
         auth.onAuthStateChanged(user => {
             const userLoggedInDiv = document.getElementById('user-logged-in');
             const userLoggedOutDiv = document.getElementById('user-logged-out');
@@ -1140,7 +1164,6 @@
             auth.signInWithEmailAndPassword(email, password).catch(e => alert("লগইন ব্যর্থ হয়েছে: " + e.message));
         }
 
-        // --- PROFILE MANAGEMENT ---
         function showProfileEditPage() {
             const user = auth.currentUser;
             if (!user) { navigateTo('home'); return; }
@@ -1181,7 +1204,7 @@
             const uploadTask = fileRef.put(file);
 
             uploadTask.on('state_changed',
-                (snapshot) => { /* Can show progress here */ },
+                (snapshot) => { },
                 (error) => alert('ছবি আপলোড ব্যর্থ হয়েছে: ' + error.message),
                 () => {
                     uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
@@ -1194,14 +1217,13 @@
             );
         }
 
-        // --- DATA FETCHING & RENDERING ---
         function fetchSiteSettings() {
             db.ref('allcoding-app/config').once('value', s => {
                 if (s.exists()) {
                     const data = s.val();
                     const siteName = data.siteName || 'AppSmart';
                     document.title = siteName + ' - আপনার পছন্দের সোর্স কোড';
-                    document.getElementById('nav-brand').textContent = siteName;
+                    document.querySelector('.navbar-brand span').textContent = siteName;
                     document.getElementById('footer-site-name').textContent = siteName;
                     document.getElementById('footer-site-name-copy').textContent = siteName;
 
@@ -1228,7 +1250,7 @@
             db.ref(path).on('value', snapshot => {
                 container.innerHTML = '';
                 snapshot.forEach(item => {
-                    if (item.key === 'placeholder') return; // Skip placeholder
+                    if (item.key === 'placeholder') return;
                     const product = { id: item.key, ...item.val() };
                     const card = document.createElement('div');
                     card.className = 'product-card';
@@ -1340,7 +1362,7 @@
                 }
                 let orderedItems = [];
                 snapshot.forEach(orderItem => orderedItems.push({key: orderItem.key, ...orderItem.val()}));
-                orderedItems.reverse(); // Show newest first
+                orderedItems.reverse(); 
 
                 orderedItems.forEach(order => {
                     const orderDate = new Date(order.orderDate).toLocaleDateString('bn-BD');
@@ -1366,7 +1388,6 @@
             });
         }
 
-        // --- E-COMMERCE & UTILITIES ---
         function handlePurchase(product) {
             const user = auth.currentUser;
             if (!user) { alert("প্রোডাক্ট কিনতে লগইন করুন।"); toggleModal('auth-modal', true); return; }
@@ -1389,7 +1410,7 @@
             db.ref(`orders/${user.uid}/${orderId}`).set({
                 productId: currentProductForPayment.id,
                 productName: currentProductForPayment.name,
-                productType: currentProductForPayment.type, // Added product type
+                productType: currentProductForPayment.type,
                 price: currentProductForPayment.price,
                 transactionId: transactionId,
                 paymentPhoneNumber: paymentPhoneNumber,
@@ -1410,9 +1431,8 @@
             if (modal) modal.classList.toggle('hidden', !show);
         }
 
-        // --- EVENT LISTENERS ---
         function setupEventListeners() {
-            document.getElementById('nav-brand').addEventListener('click', (e) => { e.preventDefault(); navigateTo('home'); });
+            document.querySelector('.navbar-brand').addEventListener('click', (e) => { e.preventDefault(); navigateTo('home'); });
             document.getElementById('nav-home').addEventListener('click', (e) => { e.preventDefault(); filterProducts('all'); });
             document.getElementById('nav-premium').addEventListener('click', (e) => { e.preventDefault(); filterProducts('premium'); });
             document.getElementById('nav-free').addEventListener('click', (e) => { e.preventDefault(); filterProducts('free'); });
@@ -1440,7 +1460,6 @@
             document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
         }
 
-        // --- THEME & SLIDER ---
         function toggleTheme() {
             const body = document.body;
             const icon = document.querySelector('#theme-toggle-btn i');
@@ -1494,8 +1513,6 @@
             prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
         }
 
-
-        // --- INITIALIZE APP ---
         document.addEventListener('DOMContentLoaded', () => {
             applyInitialTheme();
             setupEventListeners();
