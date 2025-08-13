@@ -979,7 +979,51 @@
             <div id="payment-instructions">
                  <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money)।</p>
                 <div id="payment-methods-container">
-                    <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->
+                    <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->// বিভিন্ন পেমেন্ট মেথড একটি অ্যারের মধ্যে রাখা হলো
+const paymentMethods = [
+    {
+        id: 'bkash',
+        name: 'বিকাশ',
+        logo: 'https://cdn.iconscout.com/icon/free/png-256/free-bkash-3331154-2778393.png' // উদাহরণ লোগো
+    },
+    {
+        id: 'nagad',
+        name: 'নগদ',
+        logo: 'https://play-lh.googleusercontent.com/Iks014Ul-022dfE3sL0iE1Yv_c2z5c434J6x-iSnD2cf4s-5-j9g_49Y_Ua00s-40-A=w240-h480-rw' // উদাহরণ লোগো
+    },
+    {
+        id: 'rocket',
+        name: 'রকেট',
+        logo: 'https://static.dbbl.com.bd/uploads/2021/01/rocket-app-logo.png' // উদাহরণ লোগো
+    },
+    {
+        id: 'visa_card',
+        name: 'ভিসা কার্ড',
+        logo: 'https://cdn.icon-icons.com/icons2/2332/PNG/512/visa_card_payment_method_icon_142203.png' // উদাহরণ লোগো
+    }
+];
+
+// পেমেন্ট মেথড দেখানোর জন্য কন্টেইনারটি সিলেক্ট করা হলো
+const paymentContainer = document.getElementById('payment-methods-container');
+
+// অ্যারে থেকে প্রতিটি পেমেন্ট মেথডের জন্য HTML তৈরি করে কন্টেইনারে যোগ করা
+paymentMethods.forEach(method => {
+    // প্রতিটি পেমেন্ট পদ্ধতির জন্য একটি করে div তৈরি করা হলো
+    const paymentOption = document.createElement('div');
+    paymentOption.classList.add('payment-option'); // স্টাইল করার জন্য একটি ক্লাস যোগ করা হলো
+
+    // রেডিও বাটন এবং লেবেল তৈরি করা হলো
+    paymentOption.innerHTML = `
+        <input type="radio" id="${method.id}" name="payment-method" value="${method.id}">
+        <label for="${method.id}">
+            <img src="${method.logo}" alt="${method.name} Logo" width="40">
+            <span>${method.name}</span>
+        </label>
+    `;
+
+    // তৈরি করা HTML-টি মূল কন্টেইনারে যোগ করা হলো
+    paymentContainer.appendChild(paymentOption);
+});
                 </div>
                 <br>
                 <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
