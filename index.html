@@ -445,7 +445,8 @@
             font-weight: 600;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 12px;
             box-sizing: border-box;
@@ -490,6 +491,12 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
+        }
+        
+        /* পরিবর্তন: পেমেন্ট ফর্ম ছোট করা */
+        #payment-modal .modal-content {
+            max-width: 400px;
+            padding: 30px;
         }
 
         .close-btn {
@@ -568,24 +575,51 @@
             color: var(--primary-color);
         }
 
-        .payment-method {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            justify-content: space-between;
-        }
+        /* পরিবর্তন: নতুন পেমেন্ট সিলেকশন স্টাইল */
+        .payment-option {
+            display: block;
+            margin-bottom: 15px;
+            text-align: left;
         
-        .payment-method > span {
-            display: flex;
-            align-items: center;
         }
 
-        .payment-method-icon {
-            width: 80px;
-            margin-right: 15px;
-            vertical-align: middle;
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-option label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+    
         }
         
+        .payment-option label img {
+             width: 40px;
+             height: 40px;
+             object-fit: contain;
+             margin-right: 15px;
+        }
+        
+        .payment-option label span {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+
+        .payment-option input[type="radio"]:checked + label {
+            border-color: var(--primary-color);
+            background-color: color-mix(in srgb, var(--primary-color) 10%, transparent);
+        }
+        .payment-option {
+            padding: bottom 5cm;;
+        }
         .copy-btn {
             background: none;
             border: none;
@@ -593,6 +627,8 @@
             cursor: pointer;
             font-size: 1.1rem;
             padding: 5px;
+            margin-left: 10px;
+            flex-shrink: 0;
         }
         
         .copy-btn:hover {
@@ -977,53 +1013,9 @@
             <span class="close-btn" data-modal-id="payment-modal">&times;</span>
             <h2 id="payment-product-name">পেমেন্ট প্রক্রিয়া</h2>
             <div id="payment-instructions">
-                 <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money)।</p>
+                 <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money) এবং মাধ্যমটি সিলেক্ট করুন।</p>
                 <div id="payment-methods-container">
-                    <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->// বিভিন্ন পেমেন্ট মেথড একটি অ্যারের মধ্যে রাখা হলো
-const paymentMethods = [
-    {
-        id: 'bkash',
-        name: 'বিকাশ',
-        logo: 'https://cdn.iconscout.com/icon/free/png-256/free-bkash-3331154-2778393.png' // উদাহরণ লোগো
-    },
-    {
-        id: 'nagad',
-        name: 'নগদ',
-        logo: 'https://play-lh.googleusercontent.com/Iks014Ul-022dfE3sL0iE1Yv_c2z5c434J6x-iSnD2cf4s-5-j9g_49Y_Ua00s-40-A=w240-h480-rw' // উদাহরণ লোগো
-    },
-    {
-        id: 'rocket',
-        name: 'রকেট',
-        logo: 'https://static.dbbl.com.bd/uploads/2021/01/rocket-app-logo.png' // উদাহরণ লোগো
-    },
-    {
-        id: 'visa_card',
-        name: 'ভিসা কার্ড',
-        logo: 'https://cdn.icon-icons.com/icons2/2332/PNG/512/visa_card_payment_method_icon_142203.png' // উদাহরণ লোগো
-    }
-];
-
-// পেমেন্ট মেথড দেখানোর জন্য কন্টেইনারটি সিলেক্ট করা হলো
-const paymentContainer = document.getElementById('payment-methods-container');
-
-// অ্যারে থেকে প্রতিটি পেমেন্ট মেথডের জন্য HTML তৈরি করে কন্টেইনারে যোগ করা
-paymentMethods.forEach(method => {
-    // প্রতিটি পেমেন্ট পদ্ধতির জন্য একটি করে div তৈরি করা হলো
-    const paymentOption = document.createElement('div');
-    paymentOption.classList.add('payment-option'); // স্টাইল করার জন্য একটি ক্লাস যোগ করা হলো
-
-    // রেডিও বাটন এবং লেবেল তৈরি করা হলো
-    paymentOption.innerHTML = `
-        <input type="radio" id="${method.id}" name="payment-method" value="${method.id}">
-        <label for="${method.id}">
-            <img src="${method.logo}" alt="${method.name} Logo" width="40">
-            <span>${method.name}</span>
-        </label>
-    `;
-
-    // তৈরি করা HTML-টি মূল কন্টেইনারে যোগ করা হলো
-    paymentContainer.appendChild(paymentOption);
-});
+                    <!-- পেমেন্ট মেথডগুলো JS দিয়ে এখানে যোগ করা হবে -->
                 </div>
                 <br>
                 <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
@@ -1045,6 +1037,7 @@ paymentMethods.forEach(method => {
                 </div>
             </div>
             
+            <!-- পরিবর্তন: ড্রপডাউন মুছে ফেলা হয়েছে এবং ইনপুটের 순서 পরিবর্তন করা হয়েছে -->
             <input type="tel" id="payment-phone-number" placeholder="যে নম্বর থেকে পেমেন্ট করেছেন" required>
             <input type="text" id="transaction-id" placeholder="আপনার পেমেন্ট Transaction ID লিখুন" required>
             <button id="submit-payment-btn" class="primary-btn">পেমেন্ট নিশ্চিত করুন</button>
@@ -1100,23 +1093,50 @@ paymentMethods.forEach(method => {
             }).catch(err => console.error('কপি করতে সমস্যা হয়েছে: ', err));
         }
 
+        // পরিবর্তন: পেমেন্ট মেথড এখন রেডিও বাটন হিসাবে দেখানো হবে
         function fetchPaymentMethods() {
-            const paymentMethodsRef = db.ref('allcoding-app/paymentMethods');
+            const paymentMethodsRef = db.ref('allcoding-app/config/paymentMethods');
             paymentMethodsRef.on('value', (snapshot) => {
                 const container = document.getElementById('payment-methods-container');
-                container.innerHTML = ''; 
-                if (snapshot.exists()) {
+                container.innerHTML = '';
+                if (snapshot.exists() && snapshot.val() !== null) {
                     snapshot.forEach(childSnapshot => {
                         const method = childSnapshot.val();
-                        container.innerHTML += `
-                            <div class="payment-method">
-                                <span>
-                                    <img src="${method.logoUrl}" alt="${method.name}" class="payment-method-icon">
-                                    <strong>${method.name}: <span>${method.number}</span></strong>
-                                </span>
-                                <button class="copy-btn" onclick="copyToClipboard('${method.number}')"><i class="fas fa-copy"></i></button>
-                            </div>`;
+                        const methodKey = childSnapshot.key;
+                        if(method.name && method.number && method.logoUrl) {
+                            const optionDiv = document.createElement('div');
+                            optionDiv.className = 'payment-option';
+                            optionDiv.innerHTML = `
+                                <input type="radio" id="method-${methodKey}" name="payment-method-radio" value="${method.name}" required>
+                                <label for="method-${methodKey}">
+                                    <img src="${method.logoUrl}" alt="${method.name} Logo">
+                                    <span>${method.name}: ${method.number}</span>
+                                    <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('${method.number}')"><i class="fas fa-copy"></i></button>
+                                </label>
+                            `;
+                            container.appendChild(optionDiv);
+                        }
                     });
+                } else {
+                    // নতুন লোগো এবং রেডিও বাটন সহ ফলব্যাক
+                    container.innerHTML = `
+                        <div class="payment-option">
+                            <input type="radio" id="method-bkash" name="payment-method-radio" value="bKash" required>
+                            <label for="method-bkash">
+                                <img src="https://i.postimg.cc/q7DqRXtR/th.jpg" alt="bKash Logo">
+                                <span>বিকাশ: 01613927674</span>
+                                <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
+                            </label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="method-nagad" name="payment-method-radio" value="Nagad" required>
+                            <label for="method-nagad">
+                                <img src="https://i.postimg.cc/4dDBFnvf/OIP.webp" alt="Nagad Logo">
+                                <span>নগদ: 01613927674</span>
+                                <button class="copy-btn" onclick="event.preventDefault(); copyToClipboard('01613927674')"><i class="fas fa-copy"></i></button>
+                            </label>
+                        </div>
+                    `;
                 }
             });
         }
@@ -1363,6 +1383,7 @@ paymentMethods.forEach(method => {
                         <h3>${order.productName}</h3>
                         <p>স্ট্যাটাস: <strong>${order.status === 'completed' ? 'অনুমোদিত' : (order.status === 'payment_submitted' ? 'রিভিউ চলছে' : 'পেন্ডিং')}</strong></p>
                         <p>অর্ডারের তারিখ: ${new Date(order.orderDate).toLocaleDateString('bn-BD')}</p>
+                        ${order.paymentMethodUsed ? `<p>পেমেন্ট মাধ্যম: <strong>${order.paymentMethodUsed}</strong></p>` : ''}
                         <p>ট্রানজেকশন আইডি: ${order.transactionId}</p>
                          ${order.appliedPromoCode ? `<p>ব্যবহৃত কোড: <strong>${order.appliedPromoCode}</strong> (ছাড়: ৳${order.discountAmount})</p>` : ''}
                         <p>সর্বমোট মূল্য: <strong>৳ ${order.finalPrice}</strong></p>
@@ -1424,6 +1445,9 @@ paymentMethods.forEach(method => {
             currentProductForPayment = product;
             currentDiscount = { code: null, amount: 0 };
             document.getElementById('promo-code').value = '';
+
+            const selectedRadio = document.querySelector('input[name="payment-method-radio"]:checked');
+            if (selectedRadio) selectedRadio.checked = false;
             
             document.getElementById('payment-product-name').textContent = `${product.name} এর জন্য পেমেন্ট করুন`;
             
@@ -1431,10 +1455,15 @@ paymentMethods.forEach(method => {
             toggleModal('payment-modal', true);
         }
 
+        // পরিবর্তন: submitPayment ফাংশনটি রেডিও বাটন থেকে তথ্য নিবে
         function submitPayment() {
             const user = auth.currentUser;
             const transactionId = document.getElementById('transaction-id').value;
             const paymentPhoneNumber = document.getElementById('payment-phone-number').value;
+            const selectedPaymentRadio = document.querySelector('input[name="payment-method-radio"]:checked');
+            const paymentMethodUsed = selectedPaymentRadio ? selectedPaymentRadio.value : null;
+
+            if (!paymentMethodUsed) { alert("আপনি কোন মাধ্যমে পেমেন্ট করেছেন, তা সিলেক্ট করুন।"); return; }
             if (!transactionId || !paymentPhoneNumber) { alert("অনুগ্রহ করে পেমেন্ট নম্বর এবং ট্রানজেকশন আইডি দিন।"); return; }
             if (!user || !currentProductForPayment) return;
 
@@ -1449,6 +1478,7 @@ paymentMethods.forEach(method => {
                 appliedPromoCode: currentDiscount.code,
                 discountAmount: currentDiscount.amount,
                 finalPrice: finalPrice,
+                paymentMethodUsed: paymentMethodUsed,
                 transactionId: transactionId,
                 paymentPhoneNumber: paymentPhoneNumber,
                 status: 'payment_submitted',
@@ -1459,6 +1489,7 @@ paymentMethods.forEach(method => {
                 toggleModal('payment-modal', false);
                 document.getElementById('transaction-id').value = '';
                 document.getElementById('payment-phone-number').value = '';
+                if (selectedPaymentRadio) selectedPaymentRadio.checked = false;
                 navigateTo('dashboard');
             }).catch(e => alert("ত্রুটি: " + e.message));
         }
