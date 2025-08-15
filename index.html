@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AppSmart - আপনার পছন্দের সোর্স কোড</title>
-    <!-- ধাপ: নতুন লোগো ফেভিকন হিসাবে যুক্ত করা হয়েছে -->
     <link id="favicon" rel="icon" href="https://i.postimg.cc/7YJ2wBqs/fainappbg.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -87,20 +86,19 @@
             height: 45px;
         }
         
-        /* নতুন সংযোজন: সার্চ বারের স্টাইল */
         .search-container {
             position: relative;
             display: flex;
             align-items: center;
-            width: 350px; /* আপনার পছন্দ মতো প্রস্থ পরিবর্তন করতে পারেন */
-            margin: 0 20px; /* ডানে-বামে স্পেস তৈরি */
+            width: 350px; 
+            margin: 0 20px; 
         }
 
         .search-container input[type="text"] {
             width: 100%;
-            padding: 10px 40px 10px 20px; /* ডানদিকে বাটনের জন্য জায়গা রাখা হয়েছে */
+            padding: 10px 40px 10px 20px; 
             border: 1px solid var(--border-color);
-            border-radius: 25px; /* গোলাকার লুকের জন্য */
+            border-radius: 25px; 
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Hind Siliguri', sans-serif;
@@ -144,7 +142,7 @@
             margin: 0 15px;
             font-weight: 500;
             transition: color 0.3s ease;
-            white-space: nowrap; /* লেখাগুলো যেন না ভাঙে */
+            white-space: nowrap; 
         }
 
         .nav-links a:hover,
@@ -518,18 +516,13 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 30px 40px;
             border-radius: 12px;
             width: 100%;
             max-width: 450px;
@@ -540,11 +533,6 @@
             transition: background-color 0.3s;
         }
         
-        #payment-modal .modal-content {
-            max-width: 400px;
-            padding: 30px;
-        }
-
         .close-btn {
             position: absolute;
             top: 15px;
@@ -560,7 +548,7 @@
             margin-bottom: 15px;
         }
 
-        .modal-content input {
+        .modal-content input, .payment-form-container input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -606,6 +594,28 @@
         .google-btn:hover {
             background-color: #c33d2e;
         }
+        
+        /* ### পরিবর্তন: পেমেন্ট পেইজের জন্য নতুন স্টাইল ### */
+        .payment-form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .payment-form-container .form-group {
+            text-align: left;
+        }
+        
+        .payment-form-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        /* ### পরিবর্তন শেষ ### */
 
         #payment-instructions {
             text-align: left;
@@ -625,7 +635,6 @@
             display: block;
             margin-bottom: 15px;
             text-align: left;
-        
         }
 
         .payment-option input[type="radio"] {
@@ -643,7 +652,6 @@
             width: 100%;
             box-sizing: border-box;
             justify-content: space-between;
-    
         }
         
         .payment-option label img {
@@ -701,6 +709,8 @@
             padding: 10px 15px;
             margin: 0;
             font-size: 1rem;
+            border-radius: 5px;
+            border: none;
         }
 
         #price-summary {
@@ -736,7 +746,7 @@
             color: white;
             padding: 20px;
             border-radius: 15px 15px 0 0;
-            margin: -40px -40px 20px -40px;
+            margin: -30px -40px 20px -40px;
         }
 
         #welcome-popup-modal .modal-header h2 {
@@ -831,108 +841,33 @@
             text-align: center;
         }
         
-        /* -------- পরিবর্তিত রেসপন্সিভ কোড -------- */
-
-        /* ট্যাবলেট ডিভাইসের জন্য স্টাইল (992px পর্যন্ত) */
+        /* Responsive Code */
         @media (max-width: 992px) {
-            .search-container {
-                width: 280px; /* সার্চ বার একটু ছোট করা হলো */
-            }
-            .nav-links {
-                display: none; /* ট্যাবলেটেও মেনু লিঙ্কগুলো হাইড করে হ্যামবার্গার মেনু আনা হলো */
-            }
-            .navbar-toggle {
-                display: block; /* হ্যামবার্গার মেনু দেখানো হলো */
-            }
-            .dashboard-grid,
-            .profile-edit-grid {
-                grid-template-columns: 1fr;
-            }
-            .dashboard-nav,
-            .profile-edit-nav {
-                margin-bottom: 20px;
-            }
+            .search-container { width: 280px; }
+            .nav-links { display: none; }
+            .navbar-toggle { display: block; }
+            .dashboard-grid, .profile-edit-grid { grid-template-columns: 1fr; }
+            .dashboard-nav, .profile-edit-nav { margin-bottom: 20px; }
         }
 
-        /* মোবাইল ডিভাইসের জন্য সম্পূর্ণ নতুন রেসপন্সিভ স্টাইল (768px পর্যন্ত) */
         @media (max-width: 768px) {
-            body {
-                /* হেডার বড় হওয়ায় বডিতে একটু বেশি প্যাডিং দেওয়া হলো */
-                padding-top: 125px; 
-            }
-            
-            .navbar {
-                height: auto; /* উচ্চতা অটো করা হলো */
-                flex-wrap: wrap; /* আইটেমগুলোকে নতুন লাইনে আনার জন্য */
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-
-            .navbar-brand {
-                /* ব্র্যান্ডকে পুরো জায়গা দেওয়ার জন্য */
-                flex-grow: 1; 
-            }
-            
-            .search-container {
-                /* সার্চ বারকে নতুন লাইনে আনার জন্য */
-                order: 3; /* ৩ নম্বর পজিশনে সার্চ বারকে আনা হলো */
-                width: 100%;
-                margin: 10px 0 0 0; /* উপরে মার্জিন, ডানে-বামে ০ */
-            }
-
-            .navbar-toggle {
-                display: block; /* হ্যামবার্গার মেনু দেখানো হলো */
-                margin-left: 15px;
-            }
-
-            .nav-links {
-                /* এই অংশটি হ্যামবার্গার মেনুর ভেতরে চলে যাবে */
-                display: none;
-                position: absolute;
-                top: 125px; /* নতুন দুই-লাইন হেডারের নিচ থেকে শুরু হবে */
-                left: 0;
-                right: 0;
-                background-color: var(--card-bg);
-                flex-direction: column;
-                padding: 10px 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                display: flex; /* জাভাস্ক্রিপ্ট দিয়ে .active ক্লাস যোগ হলে এটি দেখা যাবে */
-            }
-
-            .nav-links a {
-                margin: 10px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .product-detail-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
+            body { padding-top: 125px; }
+            .navbar { height: auto; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+            .navbar-brand { flex-grow: 1; }
+            .search-container { order: 3; width: 100%; margin: 10px 0 0 0; }
+            .navbar-toggle { display: block; margin-left: 15px; }
+            .nav-links { position: absolute; top: 125px; left: 0; right: 0; background-color: var(--card-bg); flex-direction: column; padding: 10px 0; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); border-top: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 10px 0; width: 100%; text-align: center; }
+            .product-detail-layout { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
 
-        /* খুব ছোট মোবাইল ডিভাইসের জন্য অতিরিক্ত স্টাইল (400px পর্যন্ত) */
         @media (max-width: 400px) {
-            .navbar-brand .navbar-logo {
-                height: 40px; /* লোগো আরেকটু ছোট করা হলো */
-            }
-            .navbar-brand span {
-                font-size: 1.5rem; /* সাইটের নাম ছোট করা হলো */
-            }
-            #login-btn {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
+            .navbar-brand .navbar-logo { height: 40px; }
+            .navbar-brand span { font-size: 1.5rem; }
+            #login-btn { padding: 8px 12px; font-size: 0.9rem; }
         }
-
     </style>
 </head>
 
@@ -940,31 +875,22 @@
 
     <nav class="navbar">
         <a href="#" class="navbar-brand">
-            <!-- ধাপ: নেভিগেশন বারে নতুন লোগো যুক্ত করা হয়েছে -->
             <img id="navbar-logo-img" src="https://i.postimg.cc/7YJ2wBqs/fainappbg.png" alt="AppSmart Logo" class="navbar-logo">
             <span id="navbar-site-name">AppSmart</span>
         </a>
-        
         <div class="nav-links" id="nav-links-container">
             <a href="#" id="nav-home">হোম</a>
             <a href="#" id="nav-premium">প্রিমিয়াম কোড</a>
             <a href="#" id="nav-free">ফ্রি কোড</a>
         </div>
-        
         <div class="navbar-user-section">
-            <button id="theme-toggle-btn" title="থিম পরিবর্তন করুন">
-                <i class="fas fa-moon"></i>
-            </button>
+            <button id="theme-toggle-btn" title="থিম পরিবর্তন করুন"><i class="fas fa-moon"></i></button>
             <div class="navbar-user">
-                <div id="user-logged-out">
-                    <button id="login-btn">লগইন / রেজিস্টার</button>
-                </div>
+                <div id="user-logged-out"><button id="login-btn">লগইন / রেজিস্টার</button></div>
                 <div id="user-logged-in" class="user-menu hidden">
                     <button class="user-menu-button">
-                        <img id="user-profile-pic-nav" src="https://i.ibb.co/6yT1W9N/placeholder-user.png" alt="User"
-                            class="user-profile-pic">
-                        <span id="user-name-btn">অ্যাকাউন্ট</span> <i class="fas fa-caret-down"
-                            style="margin-left: 5px;"></i>
+                        <img id="user-profile-pic-nav" src="https://i.ibb.co/6yT1W9N/placeholder-user.png" alt="User" class="user-profile-pic">
+                        <span id="user-name-btn">অ্যাকাউন্ট</span> <i class="fas fa-caret-down" style="margin-left: 5px;"></i>
                     </button>
                     <div class="user-menu-content">
                         <a href="#" id="dashboard-link">ড্যাশবোর্ড</a>
@@ -973,21 +899,14 @@
                     </div>
                 </div>
             </div>
-            <button class="navbar-toggle" id="navbar-toggle-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="navbar-toggle" id="navbar-toggle-btn"><i class="fas fa-bars"></i></button>
         </div>
-        
-        <!-- সার্চ বারকে শেষে আনা হয়েছে যাতে flexbox order ঠিকভাবে কাজ করে -->
         <div class="search-container">
-            <input type="text" placeholder="অনুসন্ধান করুন...">
-            <button type="submit"><i class="fas fa-search"></i></button>
+            <input type="text" placeholder="অনুসন্ধান করুন..."><button type="submit"><i class="fas fa-search"></i></button>
         </div>
-
     </nav>
 
     <main id="app">
-        <!-- Home Page -->
         <div id="home-page">
             <section id="premium-products" class="container">
                 <h2 class="section-heading"> প্রিমিয়াম কালেকশন</h2>
@@ -998,43 +917,26 @@
                 <div id="free-products-grid" class="product-grid"></div>
             </section>
         </div>
-
-        <!-- Product Detail Page -->
-        <div id="product-detail-page" class="hidden">
-            <div class="container" id="product-detail-content"></div>
-        </div>
-
-        <!-- User Dashboard Page -->
+        <div id="product-detail-page" class="hidden"><div class="container" id="product-detail-content"></div></div>
         <div id="user-dashboard-page" class="hidden">
             <div class="container">
                 <h2 class="section-heading">আমার অ্যাকাউন্ট</h2>
                 <div class="dashboard-grid">
-                    <nav class="dashboard-nav">
-                        <a href="#" id="dashboard-nav-purchases" class="active">আমার কেনা প্রোডাক্ট</a>
-                    </nav>
-                    <div class="dashboard-content">
-                        <div id="purchased-items-list"></div>
-                    </div>
+                    <nav class="dashboard-nav"><a href="#" id="dashboard-nav-purchases" class="active">আমার কেনা প্রোডাক্ট</a></nav>
+                    <div class="dashboard-content"><div id="purchased-items-list"></div></div>
                 </div>
             </div>
         </div>
-
-        <!-- Profile Edit Page -->
         <div id="profile-edit-page" class="hidden">
             <div class="container">
                 <h2 class="section-heading">প্রোফাইল এডিট</h2>
                 <div class="profile-edit-grid">
-                    <nav class="profile-edit-nav">
-                        <a href="#" id="profile-edit-nav-info" class="active">সাধারণ তথ্য</a>
-                    </nav>
+                    <nav class="profile-edit-nav"><a href="#" id="profile-edit-nav-info" class="active">সাধারণ তথ্য</a></nav>
                     <div class="profile-edit-content">
                         <div class="profile-pic-uploader">
-                            <img id="profile-edit-pic-preview" src="https://i.ibb.co/6yT1W9N/placeholder-user.png"
-                                alt="Profile Picture">
+                            <img id="profile-edit-pic-preview" src="https://i.ibb.co/6yT1W9N/placeholder-user.png" alt="Profile Picture">
                             <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
-                            <button class="primary-btn"
-                                onclick="document.getElementById('profile-pic-input').click()">ছবি পরিবর্তন
-                                করুন</button>
+                            <button class="primary-btn" onclick="document.getElementById('profile-pic-input').click()">ছবি পরিবর্তন করুন</button>
                         </div>
                         <div class="form-group">
                             <label for="profile-edit-name">আপনার নাম</label>
@@ -1049,6 +951,53 @@
                 </div>
             </div>
         </div>
+
+        <!-- ### পরিবর্তন শুরু: পেমেন্ট মডালকে একটি নতুন পেইজে রূপান্তর করা হয়েছে ### -->
+        <div id="payment-page" class="hidden">
+            <div class="container">
+                <div class="payment-form-container">
+                    <h2 class="section-heading" id="payment-product-name">পেমেন্ট প্রক্রিয়া</h2>
+                    
+                    <div id="payment-instructions">
+                        <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money) এবং মাধ্যমটি সিলেক্ট করুন।</p>
+                        <div id="payment-methods-container"></div>
+                        <br>
+                        <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
+                    </div>
+
+                    <div id="price-summary">
+                        <p><span>মূল দাম:</span> <span id="original-price-summary"></span></p>
+                        <p id="discount-summary" class="hidden"><span>ডিসকাউন্ট:</span> <span id="discount-amount-summary"></span></p>
+                        <hr>
+                        <p><strong>সর্বমোট:</strong> <strong id="final-price-summary"></strong></p>
+                    </div>
+
+                    <div id="promo-section" class="form-group">
+                        <label for="promo-code">প্রোমো কোড (থাকলে দিন)</label>
+                        <div class="promo-input-group">
+                            <input type="text" id="promo-code" placeholder="PROMO CODE">
+                            <button id="apply-promo-btn" class="secondary-btn">প্রয়োগ</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="payment-phone-number">যে নম্বর থেকে পেমেন্ট করেছেন</label>
+                        <input type="tel" id="payment-phone-number" placeholder="আপনার পেমেন্ট নম্বর" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-id">আপনার পেমেন্ট Transaction ID</label>
+                        <input type="text" id="transaction-id" placeholder="ট্রানজেকশন আইডি লিখুন" required>
+                    </div>
+
+                    <div class="payment-form-buttons">
+                        <button id="cancel-payment-btn" class="secondary-btn">বাতিল করুন</button>
+                        <button id="submit-payment-btn" class="primary-btn">পেমেন্ট নিশ্চিত করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ### পরিবর্তন শেষ ### -->
+
     </main>
 
     <footer class="footer">
@@ -1064,9 +1013,7 @@
                 <h3>গুরুত্বপূর্ণ লিংক</h3>
                 <a href="#">আমাদের সম্পর্কে</a><br>
                 <a href="#">শর্তাবলী</a><br>
-                <a id="footer-email-link" href="mailto:your-email@example.com">
-                    <i class="fas fa-envelope"></i> ইমেইলে যোগাযোগ
-                </a>
+                <a id="footer-email-link" href="mailto:your-email@example.com"><i class="fas fa-envelope"></i> ইমেইলে যোগাযোগ</a>
             </div>
             <div class="footer-section">
                 <h3>সামাজিক মাধ্যম</h3>
@@ -1077,9 +1024,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2025 <span id="footer-site-name-copy">AppSmart</span>. সর্বস্বত্ব সংরক্ষিত।
-        </div>
+        <div class="footer-bottom">&copy; 2025 <span id="footer-site-name-copy">AppSmart</span>. সর্বস্বত্ব সংরক্ষিত।</div>
     </footer>
 
     <!-- Modals -->
@@ -1107,36 +1052,20 @@
         </div>
     </div>
 
-    <div id="payment-modal" class="modal hidden">
+    <div id="payment-success-modal" class="modal hidden">
         <div class="modal-content">
-            <span class="close-btn" data-modal-id="payment-modal">&times;</span>
-            <h2 id="payment-product-name">পেমেন্ট প্রক্রিয়া</h2>
-            <div id="payment-instructions">
-                 <p>অনুগ্রহ করে নিচের পেমেন্ট গেটওয়েতে <strong><span id="payment-price-instruction"></span></strong> পেমেন্ট করুন (Send Money) এবং মাধ্যমটি সিলেক্ট করুন।</p>
-                <div id="payment-methods-container">
+            <span class="close-btn" data-modal-id="payment-success-modal">&times;</span>
+            <div style="text-align: center;">
+                 <i class="fas fa-check-circle" style="font-size: 4.5rem; color: var(--success-color); margin-bottom: 20px;"></i>
+                <h2>পেমেন্ট রিকুয়েস্ট সাবমিট হয়েছে</h2>
+                <div style="max-height: 25vh; overflow-y: auto; text-align: left; padding: 15px; background-color: var(--bg-color); border-radius: 8px; margin-top: 15px; border: 1px solid var(--border-color);">
+                    <p>আপনার পেমেন্ট রিকুয়েস্ট সফলভাবে সাবমিট হয়েছে।</p>
+                    <p>আমাদের অ্যাডমিন আপনার পেমেন্ট যাচাই করবেন। যাচাই প্রক্রিয়া সম্পন্ন হতে সাধারণত ৩০ মিনিট থেকে সর্বোচ্চ ২৪ ঘণ্টা সময় লাগতে পারে।</p>
+                    <p>পেমেন্ট অনুমোদিত হওয়ার পর, আপনি আপনার ড্যাশবোর্ডের "আমার কেনা প্রোডাক্ট" অংশে আপনার ক্রয় করা সোর্স কোডটি ডাউনলোড করার অপশন পেয়ে যাবেন।</p>
+                    <p>ধন্যবাদ!</p>
                 </div>
-                <br>
-                <p>পেমেন্ট করার পর নিচের বক্সে আপনার তথ্য দিন।</p>
+                 <button id="close-success-modal-btn" class="primary-btn" style="margin-top: 25px; width: 50%;">ঠিক আছে</button>
             </div>
-
-            <div id="price-summary">
-                <p><span>মূল দাম:</span> <span id="original-price-summary"></span></p>
-                <p id="discount-summary" class="hidden"><span>ডিসকাউন্ট:</span> <span id="discount-amount-summary"></span></p>
-                <hr>
-                <p><strong>সর্বমোট:</strong> <strong id="final-price-summary"></strong></p>
-            </div>
-
-            <div id="promo-section">
-                <label for="promo-code">প্রোমো কোড (থাকলে দিন)</label>
-                <div class="promo-input-group">
-                    <input type="text" id="promo-code" placeholder="PROMO CODE">
-                    <button id="apply-promo-btn" class="secondary-btn">প্রয়োগ</button>
-                </div>
-            </div>
-            
-            <input type="tel" id="payment-phone-number" placeholder="যে নম্বর থেকে পেমেন্ট করেছেন" required>
-            <input type="text" id="transaction-id" placeholder="আপনার পেমেন্ট Transaction ID লিখুন" required>
-            <button id="submit-payment-btn" class="primary-btn">পেমেন্ট নিশ্চিত করুন</button>
         </div>
     </div>
 
@@ -1152,81 +1081,62 @@
         </div>
     </div>
 
-    <!-- Firebase SDK v9+ (Modern) যুক্ত করা হয়েছে -->
+    <!-- Firebase SDK v9+ -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import { getDatabase, ref, onValue, get, child, set, push, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        import { getDatabase, ref, onValue, get, set, push, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
         import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
-        // --- Firebase ইনিশিয়ালাইজেশন এবং সার্ভিস ভ্যারিয়েবল ---
-        
-        // ডিফল্ট কনফিগারেশন, যদি ডেটাবেস থেকে লোড না হয় তাহলে এটি ব্যবহৃত হবে।
-        const fallbackConfig = {
-            apiKey: "AIzaSyAekyfwK_X4qpz1R1nYo8hoUSO481t6sJc",
-            authDomain: "newappsmart.firebaseapp.com",
-            databaseURL: "https://newappsmart-default-rtdb.firebaseio.com",
-            projectId: "newappsmart",
-            storageBucket: "newappsmart.firebasestorage.app",
-            messagingSenderId: "985060087689",
-            appId: "1:985060087689:web:01f85023141e1396743358",
-            measurementId: "G-6DRY7XJMMK"
+        // --- Firebase ইনিশিয়ালাইজেশন ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpdzOMNHBHltOoGpmyr1RhFsz4MyfwPRc",
+            authDomain: "apps--mart-v2.firebaseapp.com",
+            projectId: "apps--mart-v2",
+            storageBucket: "apps--mart-v2.firebasestorage.app",
+            messagingSenderId: "544689364247",
+            appId: "1:544689364247:web:6f1e67ff6fb632be506b52",
+            measurementId: "G-0PWBQCEEN0"
         };
         
         let app, auth, db, storage;
 
-        async function initializeFirebase() {
+        // --- অ্যাপ্লিকেশন শুরু করার মূল ফাংশন ---
+        function initializeAndRunApp() {
             try {
-                const bootstrapApp = initializeApp(fallbackConfig, "bootstrapApp");
-                const bootstrapDb = getDatabase(bootstrapApp);
-                const configRef = ref(bootstrapDb, 'allcoding-app/firebaseConfig');
-                
-                const snapshot = await get(configRef);
-                
-                let finalConfig = fallbackConfig;
-                if (snapshot.exists()) {
-                    const dbConfig = snapshot.val();
-                    if (dbConfig.apiKey && dbConfig.authDomain && dbConfig.projectId) {
-                        finalConfig = dbConfig;
-                        console.log("Firebase configuration loaded from database.");
-                    } else {
-                        console.warn("Configuration from database is incomplete. Using fallback configuration.");
-                    }
-                } else {
-                    console.log("No Firebase configuration found in database. Using fallback configuration.");
-                }
-
-                app = initializeApp(finalConfig, "mainApp");
+                app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getDatabase(app);
                 storage = getStorage(app);
-
                 runApp();
-
             } catch (error) {
                 console.error("Firebase initialization failed:", error);
-                app = initializeApp(fallbackConfig, "mainAppFallback");
-                auth = getAuth(app);
-                db = getDatabase(app);
-                storage = getStorage(app);
-                runApp();
+                document.body.innerHTML = `<h1>Firebase Configuration Error</h1><p>Please check if the Firebase config is correct.</p>`;
             }
         }
         
-        // --- অ্যাপ্লিকেশন শুরু করার মূল ফাংশন ---
         function runApp() {
-            // এই ফাংশনের মধ্যে আপনার অ্যাপের সকল লজিক থাকবে
             let currentProductForPayment = null;
             let visiblePage = 'home';
             let currentDiscount = { code: null, amount: 0 };
-
-            const elements = {
-                pages: { home: document.getElementById('home-page'), productDetail: document.getElementById('product-detail-page'), dashboard: document.getElementById('user-dashboard-page'), profileEdit: document.getElementById('profile-edit-page'), },
-                modals: { auth: document.getElementById('auth-modal'), payment: document.getElementById('payment-modal'), welcome: document.getElementById('welcome-popup-modal'), },
-            };
             
-            // ... (এখানে আপনার বাকি সকল helper functions যেমন copyToClipboard, fetchPaymentMethods, navigateTo ইত্যাদি থাকবে) ...
+            // ### পরিবর্তন শুরু: পেইজের তালিকায় নতুন পেমেন্ট পেইজ যুক্ত করা হয়েছে ###
+            const elements = {
+                pages: { 
+                    home: document.getElementById('home-page'), 
+                    productDetail: document.getElementById('product-detail-page'), 
+                    dashboard: document.getElementById('user-dashboard-page'), 
+                    profileEdit: document.getElementById('profile-edit-page'),
+                    payment: document.getElementById('payment-page') // নতুন পেইজ
+                },
+                modals: { 
+                    auth: document.getElementById('auth-modal'), 
+                    welcome: document.getElementById('welcome-popup-modal'), 
+                    paymentSuccess: document.getElementById('payment-success-modal') 
+                },
+            };
+            // ### পরিবর্তন শেষ ###
+            
              function copyToClipboard(textToCopy) {
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     alert(`"${textToCopy}" কপি করা হয়েছে!`);
@@ -1234,7 +1144,6 @@
             }
 
             window.copyToClipboard = copyToClipboard;
-
 
             function fetchPaymentMethods() {
                 const paymentMethodsRef = ref(db, 'allcoding-app/paymentMethods');
@@ -1306,7 +1215,7 @@
                     } else {
                         userLoggedInDiv.classList.add('hidden');
                         userLoggedOutDiv.classList.remove('hidden');
-                        if (visiblePage === 'dashboard' || visiblePage === 'profileEdit') {
+                        if (visiblePage === 'dashboard' || visiblePage === 'profileEdit' || visiblePage === 'payment') {
                             navigateTo('home');
                         }
                     }
@@ -1405,21 +1314,19 @@
             }
 
             function fetchSiteSettings() {
-                const settingsRef = ref(db, 'allcoding-app');
+                const settingsRef = ref(db, 'allcoding-app/siteInfo');
                 onValue(settingsRef, s => {
                     if (s.exists()) {
-                        const data = s.val();
-                        const config = data.config || {};
-                        const siteInfo = data.siteInfo || {};
+                        const siteInfo = s.val() || {};
                         
-                        document.title = config.siteName || "AppSmart";
-                        document.getElementById('navbar-site-name').textContent = config.siteName || "AppSmart";
-                        document.getElementById('footer-site-name').textContent = config.siteName || "AppSmart";
-                        document.getElementById('footer-site-name-copy').textContent = config.siteName || "AppSmart";
+                        document.title = siteInfo.siteName || "AppSmart";
+                        document.getElementById('navbar-site-name').textContent = siteInfo.siteName || "AppSmart";
+                        document.getElementById('footer-site-name').textContent = siteInfo.siteName || "AppSmart";
+                        document.getElementById('footer-site-name-copy').textContent = siteInfo.siteName || "AppSmart";
 
-                        document.getElementById('navbar-logo-img').src = config.logoUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
-                        document.getElementById('footer-logo-img').src = config.logoUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
-                        document.getElementById('favicon').href = config.faviconUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
+                        document.getElementById('navbar-logo-img').src = siteInfo.logoUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
+                        document.getElementById('footer-logo-img').src = siteInfo.logoUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
+                        document.getElementById('favicon').href = siteInfo.faviconUrl || 'https://i.postimg.cc/7YJ2wBqs/fainappbg.png';
                         
                         if (siteInfo.facebookUrl) document.getElementById('footer-fb').href = siteInfo.facebookUrl;
                         if (siteInfo.telegramUrl) document.getElementById('footer-tg').href = siteInfo.telegramUrl;
@@ -1444,61 +1351,81 @@
             }
 
             async function showProductDetail(productId, type) {
-                const productTypePath = type === 'premium' ? 'premiumCodings' : 'freeCodings';
-                const productRef = ref(db, `allcoding-app/${productTypePath}/${productId}`);
-                const productSnapshot = await get(productRef);
-                if (!productSnapshot.exists()) {
-                    document.getElementById('product-detail-content').innerHTML = `<h1>প্রোডাক্ট পাওয়া যায়নি।</h1>`;
-                    return;
-                }
-                const product = { id: productId, type: type, ...productSnapshot.val() };
                 const content = document.getElementById('product-detail-content');
-                const isPurchased = await checkIfProductIsPurchased(productId);
-                
-                let priceHTML = `<div class="price">৳ ${product.price}</div>`;
-                if(product.discountPrice && product.discountPrice > 0){
-                    priceHTML = `<div class="price"><span class="original-price">৳ ${product.price}</span> ৳ ${product.discountPrice}</div>`;
-                }
+                content.innerHTML = `<h2 style="text-align: center; padding: 50px 0;">লোড হচ্ছে...</h2>`;
 
-                let buttonHTML = '';
-                if(type === 'premium') {
-                    if (isPurchased && product.downloadUrl) {
-                        buttonHTML = `<a href="${product.downloadUrl}" class="download-btn" target="_blank"><i class="fas fa-download"></i> সোর্স কোড ডাউনলোড করুন</a>`;
-                    } else {
-                        buttonHTML = `<button class="buy-btn" id="buy-product-btn"><i class="fas fa-shopping-cart"></i> এখনই কিনুন</button>`;
+                try {
+                    const productTypePath = type === 'premium' ? 'premiumCodings' : 'freeCodings';
+                    const productRef = ref(db, `allcoding-app/${productTypePath}/${productId}`);
+                    const productSnapshot = await get(productRef);
+
+                    if (!productSnapshot.exists()) {
+                        content.innerHTML = `<h1>প্রোডাক্ট পাওয়া যায়নি।</h1>`;
+                        return;
                     }
-                } else {
-                     buttonHTML = `<a href="${product.downloadUrl}" class="download-btn" target="_blank"><i class="fas fa-download"></i> ডাউনলোড করুন</a>`;
-                }
+                    const product = { id: productId, type: type, ...productSnapshot.val() };
+                    const isPurchased = await checkIfProductIsPurchased(productId);
+                    
+                    const productName = product.name || "নামবিহীন প্রোডাক্ট";
+                    const listImage = product.listImageUrl || 'https://i.postimg.cc/m2tM3rT7/placeholder.png';
+                    const productDescription = (product.description && typeof product.description === 'string') ? product.description.replace(/\n/g, '<br>') : '';
+                    const originalPrice = parseFloat(product.price) || 0;
+                    const discountPrice = parseFloat(product.discountPrice) || 0;
+                    
+                    let priceHTML = '';
+                    if (type === 'premium') {
+                        priceHTML = (discountPrice > 0 && discountPrice < originalPrice) 
+                            ? `<div class="price"><span class="original-price">৳ ${originalPrice.toFixed(2)}</span> ৳ ${discountPrice.toFixed(2)}</div>`
+                            : `<div class="price">৳ ${originalPrice.toFixed(2)}</div>`;
+                    }
+                    
+                    let buttonHTML = '';
+                    if (type === 'premium') {
+                        buttonHTML = (isPurchased && product.downloadUrl)
+                            ? `<a href="${product.downloadUrl}" class="download-btn" target="_blank"><i class="fas fa-download"></i> সোর্স কোড ডাউনলোড করুন</a>`
+                            : `<button class="buy-btn" id="buy-product-btn"><i class="fas fa-shopping-cart"></i> এখনই কিনুন</button>`;
+                    } else if (product.downloadUrl) {
+                        buttonHTML = `<a href="${product.downloadUrl}" class="download-btn" target="_blank"><i class="fas fa-download"></i> ডাউনলোড করুন</a>`;
+                    }
 
-                let screenshotsHTML = '';
-                [product.screenshot1Url, product.screenshot2Url, product.screenshot3Url].forEach(url => {
-                    if(url) screenshotsHTML += `<img src="${url}" alt="Screenshot">`;
-                });
+                    let screenshotsHTML = '';
+                    [product.screenshot1Url, product.screenshot2Url, product.screenshot3Url].forEach(url => {
+                        if(url && typeof url === 'string') screenshotsHTML += `<img src="${url}" alt="Screenshot">`;
+                    });
+                    
+                    let videoHTML = '';
+                    if (product.videoUrl && typeof product.videoUrl === 'string') {
+                        let videoId = null;
+                        try {
+                            if (product.videoUrl.includes('watch?v=')) videoId = new URL(product.videoUrl).searchParams.get('v');
+                            else if (product.videoUrl.includes('youtu.be/')) videoId = new URL(product.videoUrl).pathname.substring(1);
+                            else if (product.videoUrl.includes('/embed/')) videoId = product.videoUrl.split('/embed/')[1].split(/[?&]/)[0];
+                        } catch(e) { console.warn("YouTube URL পার্স করা যায়নি:", product.videoUrl, e); }
 
-                let videoHTML = '';
-                if (product.videoUrl) {
-                    videoHTML = `<div class="product-video"><iframe src="${product.videoUrl.replace('watch?v=', 'embed/')}" frameborder="0" allowfullscreen></iframe></div>`;
-                }
-                
-                content.innerHTML = `
-                    <div class="product-detail-layout">
-                        <div class="product-images">
-                            <img src="${product.listImageUrl}" alt="${product.name}">
-                            ${screenshotsHTML}
-                            ${videoHTML}
-                        </div>
-                        <div class="product-info">
-                            <h1>${product.name}</h1>
-                            ${priceHTML}
-                            <p>${product.description || ''}</p>
-                            ${buttonHTML}
-                        </div>
-                    </div>
-                `;
+                        if (videoId) videoHTML = `<div class="product-video"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`;
+                    }
+                    
+                    content.innerHTML = `
+                        <div class="product-detail-layout">
+                            <div class="product-images">
+                                <img src="${listImage}" alt="${productName}">
+                                ${screenshotsHTML}
+                                ${videoHTML}
+                            </div>
+                            <div class="product-info">
+                                <h1>${productName}</h1>
+                                ${priceHTML}
+                                <p>${productDescription}</p>
+                                ${buttonHTML}
+                            </div>
+                        </div>`;
 
-                if (type === 'premium' && !isPurchased) {
-                    document.getElementById('buy-product-btn').onclick = () => handlePurchase(product);
+                    if (type === 'premium' && !isPurchased) {
+                        document.getElementById('buy-product-btn').onclick = () => handlePurchase(product);
+                    }
+                } catch (error) {
+                    console.error("showProductDetail Error:", error);
+                    content.innerHTML = `<h1>দুঃখিত, প্রোডাক্টটি লোড করার সময় একটি সমস্যা হয়েছে।</h1>`;
                 }
             }
             
@@ -1507,26 +1434,19 @@
                 const container = document.getElementById('purchased-items-list');
                 const ordersRef = ref(db, `orders/${user.uid}`);
                 onValue(ordersRef, snapshot => {
-                    container.innerHTML = '';
-                    if (!snapshot.exists()) {
-                        container.innerHTML = `<p>আপনি এখনও কোনো প্রোডাক্ট কিনেননি।</p>`;
-                        return;
-                    }
+                    container.innerHTML = snapshot.exists() ? '' : `<p>আপনি এখনও কোনো প্রোডাক্ট কিনেননি।</p>`;
+                    if (!snapshot.exists()) return;
+                    
                     snapshot.forEach(orderItem => {
                         const order = orderItem.val();
                         let statusText = '';
                         let downloadButton = '';
 
-                        if (order.status === 'payment_submitted') {
-                            statusText = '<span style="color: orange;">পেমেন্ট পেন্ডিং</span>';
-                        } else if (order.status === 'completed') {
+                        if (order.status === 'payment_submitted') statusText = '<span style="color: orange;">পেমেন্ট পেন্ডিং</span>';
+                        else if (order.status === 'completed') {
                             statusText = '<span style="color: green;">সম্পন্ন</span>';
-                            if(order.downloadUrl) {
-                                downloadButton = `<a href="${order.downloadUrl}" target="_blank" class="primary-btn" style="width: auto; padding: 8px 15px; text-decoration: none;">ডাউনলোড</a>`;
-                            }
-                        } else {
-                             statusText = `<span style="color: red;">বাতিল</span>`;
-                        }
+                            if(order.downloadUrl) downloadButton = `<a href="${order.downloadUrl}" target="_blank" class="primary-btn" style="width: auto; padding: 8px 15px; text-decoration: none;">ডাউনলোড</a>`;
+                        } else statusText = `<span style="color: red;">বাতিল</span>`;
 
                         const card = document.createElement('div');
                         card.className = 'order-card';
@@ -1535,8 +1455,7 @@
                             <p><strong>অর্ডার আইডি:</strong> ${orderItem.key}</p>
                             <p><strong>দাম:</strong> ৳ ${order.price}</p>
                             <p><strong>অবস্থা:</strong> ${statusText}</p>
-                            ${downloadButton ? `<div style="margin-top: 10px;">${downloadButton}</div>` : ''}
-                        `;
+                            ${downloadButton ? `<div style="margin-top: 10px;">${downloadButton}</div>` : ''}`;
                         container.appendChild(card);
                     });
                 });
@@ -1546,26 +1465,21 @@
                 const codeInput = document.getElementById('promo-code').value.trim().toUpperCase();
                 if (!codeInput || !currentProductForPayment) return;
 
-                const promoRef = ref(db, `allcoding-app/promoCodes/${codeInput}`);
-                const snapshot = await get(promoRef);
+                const snapshot = await get(ref(db, `allcoding-app/promoCodes/${codeInput}`));
 
                 if (snapshot.exists() && snapshot.val().isActive) {
                     const promoData = snapshot.val();
                     const discountPercentage = promoData.discountPercentage;
-                    
                     const actualPrice = currentProductForPayment.discountPrice || currentProductForPayment.price;
                     const discountValue = (actualPrice * discountPercentage) / 100;
                     
-                    currentDiscount.code = codeInput;
-                    currentDiscount.amount = discountValue;
-                    
+                    currentDiscount = { code: codeInput, amount: discountValue };
                     alert(`"${codeInput}" কোডটি সফলভাবে প্রয়োগ করা হয়েছে!`);
-                    updatePriceSummary();
                 } else {
                     alert('দুঃখিত, এই প্রোমো কোডটি সঠিক নয় বা বর্তমানে فعال নেই।');
                     currentDiscount = { code: null, amount: 0 };
-                    updatePriceSummary();
                 }
+                updatePriceSummary();
             }
             
             function updatePriceSummary() {
@@ -1574,16 +1488,11 @@
                 const originalPrice = parseFloat(currentProductForPayment.price);
                 const discountPrice = parseFloat(currentProductForPayment.discountPrice) || originalPrice;
                 const promoDiscount = currentDiscount.amount || 0;
-                
                 const finalPrice = discountPrice - promoDiscount;
                 
                 document.getElementById('original-price-summary').textContent = `৳ ${originalPrice.toFixed(2)}`;
-                if(promoDiscount > 0) {
-                     document.getElementById('discount-summary').classList.remove('hidden');
-                     document.getElementById('discount-amount-summary').textContent = `- ৳ ${promoDiscount.toFixed(2)}`;
-                } else {
-                    document.getElementById('discount-summary').classList.add('hidden');
-                }
+                document.getElementById('discount-summary').classList.toggle('hidden', promoDiscount <= 0);
+                document.getElementById('discount-amount-summary').textContent = `- ৳ ${promoDiscount.toFixed(2)}`;
                 document.getElementById('final-price-summary').textContent = `৳ ${finalPrice.toFixed(2)}`;
                 document.getElementById('payment-price-instruction').textContent = `৳ ${finalPrice.toFixed(2)}`;
             }
@@ -1593,12 +1502,20 @@
                 if (!user) { alert("প্রোডাক্ট কিনতে লগইন করুন।"); toggleModal('auth-modal', true); return; }
                 
                 currentProductForPayment = product;
-                currentDiscount = { code: null, amount: 0 }; // Reset promo code
+                currentDiscount = { code: null, amount: 0 };
                 document.getElementById('payment-product-name').textContent = `${product.name} - পেমেন্ট`;
-                document.getElementById('promo-code').value = ''; // Clear input field
+                document.getElementById('promo-code').value = '';
+
+                // সকল ইনপুট ফিল্ড রিসেট করা
+                document.getElementById('payment-phone-number').value = '';
+                document.getElementById('transaction-id').value = '';
+                const radioButtons = document.querySelectorAll('input[name="payment-method-radio"]');
+                radioButtons.forEach(radio => radio.checked = false);
+
 
                 updatePriceSummary();
-                toggleModal('payment-modal', true);
+                // ### পরিবর্তন: মডালের পরিবর্তে পেমেন্ট পেইজে নেভিগেট করা হচ্ছে ###
+                navigateTo('payment');
             }
 
             function submitPayment() {
@@ -1618,26 +1535,22 @@
 
                 const newOrderRef = push(ref(db, `orders/${user.uid}`));
                 set(newOrderRef, {
-                    userId: user.uid,
-                    productId: currentProductForPayment.id,
-                    productName: currentProductForPayment.name,
+                    userId: user.uid, productId: currentProductForPayment.id, productName: currentProductForPayment.name,
                     productType: currentProductForPayment.type === 'premium' ? 'premiumCodings' : 'freeCodings',
-                    price: finalPrice,
-                    paymentMethod: selectedMethodRadio.value,
-                    paymentPhoneNumber: phoneNumber,
-                    transactionId: transactionId,
-                    promoCodeUsed: currentDiscount.code,
-                    status: 'payment_submitted',
+                    price: finalPrice, paymentMethod: selectedMethodRadio.value, paymentPhoneNumber: phoneNumber,
+                    transactionId: transactionId, promoCodeUsed: currentDiscount.code, status: 'payment_submitted',
                     orderDate: serverTimestamp()
                 }).then(() => {
-                    alert("আপনার পেমেন্ট রিকুয়েস্ট সাবমিট হয়েছে। অ্যাডমিন দ্বারা পর্যালোচনার পর আপনার ড্যাশবোর্ডে প্রোডাক্টটি পেয়ে যাবেন।");
-                    toggleModal('payment-modal', false);
+                    // ### পরিবর্তন: সফল হওয়ার পর ড্যাশবোর্ডে পাঠানো হচ্ছে ###
+                    navigateTo('dashboard');
+                    toggleModal('paymentSuccess', true); 
                     currentProductForPayment = null;
                 }).catch(e => alert("ত্রুটি: " + e.message));
             }
 
             function toggleModal(modalId, show) {
-                document.getElementById(modalId)?.classList.toggle('hidden', !show);
+                const modal = elements.modals[modalId] || document.getElementById(modalId);
+                if (modal) modal.classList.toggle('hidden', !show);
             }
 
             function setupEventListeners() {
@@ -1657,19 +1570,30 @@
                 document.getElementById('register-submit-btn').addEventListener('click', handleEmailRegister);
                 document.getElementById('login-submit-btn').addEventListener('click', handleEmailLogin);
                 document.getElementById('profile-save-btn').addEventListener('click', handleProfileUpdate);
-                document.getElementById('profile-pic-input').addEventListener('change', (e) => { if (e.target.files && e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => document.getElementById('profile-edit-pic-preview').src = ev.target.result; reader.readAsDataURL(e.target.files[0]); } });
+                document.getElementById('profile-pic-input').addEventListener('change', (e) => { if (e.target.files[0]) { const reader = new FileReader(); reader.onload = (ev) => document.getElementById('profile-edit-pic-preview').src = ev.target.result; reader.readAsDataURL(e.target.files[0]); } });
                 document.getElementById('submit-payment-btn').addEventListener('click', submitPayment);
                 document.getElementById('navbar-toggle-btn').addEventListener('click', () => { document.getElementById('nav-links-container').classList.toggle('active'); });
                 document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
                 document.getElementById('apply-promo-btn').addEventListener('click', applyPromoCode);
+                document.getElementById('close-success-modal-btn').addEventListener('click', () => toggleModal('paymentSuccess', false));
+                
+                // ### পরিবর্তন: পেমেন্ট বাতিল করার বাটনের জন্য ইভেন্ট লিসেনার ###
+                document.getElementById('cancel-payment-btn').addEventListener('click', () => {
+                    if (currentProductForPayment) {
+                        navigateTo('productDetail', { id: currentProductForPayment.id, type: currentProductForPayment.type });
+                    } else {
+                        navigateTo('home');
+                    }
+                });
             }
 
             function toggleTheme() {
                 const body = document.body;
                 const icon = document.querySelector('#theme-toggle-btn i');
                 body.classList.toggle('dark-theme');
-                localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
-                icon.className = body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
+                const isDark = body.classList.contains('dark-theme');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
             }
 
             function applyInitialTheme() {
@@ -1710,7 +1634,6 @@
                 });
             }
             
-            // runApp ফাংশনের ভেতরে আসল কাজগুলো শুরু হবে
             applyInitialTheme();
             setupEventListeners();
             setupAuthObserver();
@@ -1722,7 +1645,7 @@
         }
 
         // --- অ্যাপ্লিকেশন শুরু ---
-        initializeFirebase();
+        initializeAndRunApp();
 
     </script>
 </body>
